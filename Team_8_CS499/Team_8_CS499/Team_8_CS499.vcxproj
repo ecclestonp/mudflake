@@ -78,6 +78,12 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Classroom.h" />
+    <ClInclude Include="Course.h" />
+    <ClInclude Include="Department.h" />
+    <ClInclude Include="Professor.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
