@@ -1,16 +1,14 @@
-#include <vector>
-#include "Course.h"
+//Dept structure
+//CS499 Senior Project
+//Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
-#pragma once
+#ifndef DEPARTMENT_H
+#define DEPARTMENT_H
 
-class Department
+//Define structure for dept
+struct Department
 {
-
-	private:
-
-	public:
-		Department();
-		~Department();
-
-		std::vector<Course> courses;
+	char deptName[100];
 };
+
+#endif
