@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "Department.h"
 
 using namespace std;
 
@@ -18,7 +19,7 @@ void splitString(string line, char delim, vector<string> &vec)
 	}
 }
 
-void parseInput()
+void parseInput(Department *dept)
 {
 	char state = 0;
 	ifstream input;
@@ -43,7 +44,7 @@ void parseInput()
 		switch (state)
 		{
 			case 2:/*  	CS 107, CS 108, CS 114, CS 144, CS 172 */
-				splitString(strn, ',', courses);
+				splitString(strn, ',', dept->courses);
 			break;
 			case 4:/*   CS 342 must be taught in Technology Hall, room 342 */
 				//TODO: implement contstraints on a case-by-case basis
@@ -67,5 +68,6 @@ void parseInput()
 
 int main(void) 
 {
-	parseInput();
+	Department dept;
+	parseInput(&dept);
 }

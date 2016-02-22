@@ -2,13 +2,16 @@
 //CS499 Senior Project
 //Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
-#ifndef DEPARTMENT_H
-#define DEPARTMENT_H
+#pragma once
+#include "Classroom.h"
+#include "Course.h"
 
 //Define structure for dept
-struct Department
+class Department
 {
-	char deptName[100];
+public:
+	string deptName;
+	vector<string> courses;/* should be Courses */
+	vector<string> professors;
+	vector<Classroom> classrooms;
 };
-
-#endif
