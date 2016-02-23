@@ -36,7 +36,7 @@ Course * BuildObj::CreateCourse(string courseNum, bool hasPreference, string pre
 Instructor * BuildObj::CreateInstructor(string instructorName, bool hasPreference, string preference)
 {
 	Instructor *ptrInstr = new Instructor;
-	ptrInstr->instructorName, instructorName;
+	ptrInstr->instructorName = instructorName;
 	ptrInstr->hasPreference = hasPreference;
 	ptrInstr->preference = preference;
 	return ptrInstr;
