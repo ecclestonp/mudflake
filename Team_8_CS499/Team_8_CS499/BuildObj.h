@@ -3,16 +3,14 @@
 //CS499 Senior Project
 //Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
-#include <iostream>
 #include "Instructor.h"
 #include "Course.h"
 #include "Classroom.h"
 #include <string>
 using namespace std;
 
-#ifndef BUILDOBJ_H
-#define BUILDOBJ_H
-
+#pragma once
+template <class retType>
 class BuildObj
 {
 	private:
@@ -20,10 +18,7 @@ class BuildObj
 	public:
 		BuildObj();
 		~BuildObj();
-
-		Course * CreateCourse(string courseNum, bool hasPreference, string preference);					//Takes in course num/preference (if it has one), returns ptr to new course
-		Instructor * CreateInstructor(string instructorName, bool hasPreference, string preference);		//Takes in instructor name/preference, returns ptr to new instructor
-		Classroom * CreateClassroom(string roomNum, string bldgNum, string classTime);					//Takes in roomnum, bldgnum and class time and returns ptr to new class
+		
+		//Now this uses templates to create any of the 3 object types with one function
+		retType * Create(string a, string b, string c, bool d, int type);	
 };
-
-#endif

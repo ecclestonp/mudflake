@@ -22,32 +22,46 @@ BuildObj::~BuildObj()
 	//Do Nothing
 }
 
-//Creates and returns a new course pointer
-Course * BuildObj::CreateCourse(string courseNum, bool hasPreference, string preference)
-{
-	Course *ptrCourse = new Course;
-	ptrCourse->hasPreference = hasPreference;
-	ptrCourse->courseNum = courseNum;
-	ptrCourse->preference = preference;
-	return ptrCourse;
-}
+//This is now reworked to use a template
 
-//Creates and returns a new instructor pointer
-Instructor * BuildObj::CreateInstructor(string instructorName, bool hasPreference, string preference)
-{
-	Instructor *ptrInstr = new Instructor;
-	ptrInstr->instructorName = instructorName;
-	ptrInstr->hasPreference = hasPreference;
-	ptrInstr->preference = preference;
-	return ptrInstr;
-}
+//To create an object, make an instance of the BuildObj class
+//Then ask it to create the object you need using the create function as in the below example and it will get a pointer:
+//Example:
+//BuildObj testbuilder;
+//Course *testcourse;
+//testcourse = testbuilder.Create<Course>("CS499", "Requires room 324", "", true, 1);
+//
+//For the last argument include int 1, 2 or 3 for which item you need built
 
-//Creates and returns a new classroom pointer
-Classroom * BuildObj::CreateClassroom(string roomNum, string bldgNum, string classTime)
+template <class retType>
+//Takes up to 3 strings, a boolean and an integer for the type of object
+//Use the strings you need for the object you are building based on the below implementation
+retType * BuildObj::Create(string a, string b, string c, bool d, int type)
 {
-	Classroom *ptrRoom = new Classroom;
-	ptrRoom->roomNum = roomNum;
-	ptrRoom->bldgNum = bldgNum;
-	ptrRoom->classTime = classTime;
-	return ptrRoom;
+	switch(type)
+	{
+		case 1:						//Set type to 1 to get a course object
+			Course *coursePtr = new Course;
+			coursePtr->hasPreference = d;		//input boolean d
+			coursePtr->courseNum = a;		//input string a
+			coursePtr->preference = b;		//input string b
+			return coursePtr;
+			break;
+		case 2:						//Set type to 2 to get an instructor object
+			Instructor *instrPtr = new Instructor;
+			instrPtr->instructorName = a;		//input string a
+			instrPtr->hasPreference = d;		//input boolean d
+			instPtr->preference = b;		//input string b
+			return instrPtr;
+			break;
+		case 3:						//Set type to 3 to get a classroom object
+			Classroom *roomPtr = new Classroom;
+			roomPtr->roomNum = a;			//input string a
+			roomPtr->bldgNum = b;			//input string b
+			roomPtr->classTime = c;			//input string c
+			return roomPtr;
+			break;
+		default:
+			return NULL;
+	}
 }
