@@ -5,13 +5,15 @@
 #pragma once
 #include "Classroom.h"
 #include "Course.h"
+#include <vector>
 
 //Define structure for dept
 class Department
 {
 public:
-	string deptName;
-	vector<string> courses;/* should be Courses */
+	std::string deptName;
+	vector<Course> courses;
 	vector<string> professors;
 	vector<Classroom> classrooms;
+	bool setCourseProfessor(string courseName, string professor);
 };
