@@ -38,27 +38,30 @@ template <class retType>
 //Use the strings you need for the object you are building based on the below implementation
 retType * BuildObj::Create(string a, string b, string c, bool d, int type)
 {
-	switch(type):
-		case 1:			//Set type to 1 to get a course object
+	switch(type)
+	{
+		case 1:						//Set type to 1 to get a course object
 			Course *coursePtr = new Course;
 			coursePtr->hasPreference = d;		//input boolean d
 			coursePtr->courseNum = a;		//input string a
 			coursePtr->preference = b;		//input string b
 			return coursePtr;
 			break;
-		case 2:			//Set type to 2 to get an instructor object
+		case 2:						//Set type to 2 to get an instructor object
 			Instructor *instrPtr = new Instructor;
 			instrPtr->instructorName = a;		//input string a
 			instrPtr->hasPreference = d;		//input boolean d
 			instPtr->preference = b;		//input string b
 			return instrPtr;
 			break;
-		case 3:			//Set type to 3 to get a classroom object
+		case 3:						//Set type to 3 to get a classroom object
 			Classroom *roomPtr = new Classroom;
 			roomPtr->roomNum = a;			//input string a
 			roomPtr->bldgNum = b;			//input string b
 			roomPtr->classTime = c;			//input string c
+			return roomPtr;
 			break;
 		default:
 			return NULL;
+	}
 }
