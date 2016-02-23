@@ -6,10 +6,9 @@
 #include "BuildObj.h"
 #include "Classroom.h"
 #include "Course.h"
-#include "Department.h"
 #include "Instructor.h"
 #include <stdio.h>
-#include <cstring>
+#include <string>
 using namespace std;
 
 //Default constructor
@@ -23,40 +22,32 @@ BuildObj::~BuildObj()
 	//Do Nothing
 }
 
-//Creates and returns a new department pointer
-Department * BuildObj::CreateDeptObj(char *deptName)
-{
-	Department *ptrDept = new Department;
-	strcpy(ptrDept->deptName, deptName);
-	return ptrDept;
-}
-
 //Creates and returns a new course pointer
-Course * BuildObj::CreateCourseObj(char *courseNum, bool hasPreference, char *preference)
+Course * BuildObj::CreateCourse(string courseNum, bool hasPreference, string preference)
 {
 	Course *ptrCourse = new Course;
 	ptrCourse->hasPreference = hasPreference;
-	strcpy(ptrCourse->courseNum, courseNum);
-	strcpy(ptrCourse->preference, preference);
+	ptrCourse->courseNum = courseNum;
+	ptrCourse->preference = preference;
 	return ptrCourse;
 }
 
 //Creates and returns a new instructor pointer
-Instructor * BuildObj::CreateInstructorObj(char *instructorName, bool hasPreference, char *preference)
+Instructor * BuildObj::CreateInstructor(string instructorName, bool hasPreference, string preference)
 {
 	Instructor *ptrInstr = new Instructor;
-	strcpy(ptrInstr->instructorName, instructorName);
+	ptrInstr->instructorName, instructorName;
 	ptrInstr->hasPreference = hasPreference;
-	strcpy(ptrInstr->preference, preference);
+	ptrInstr->preference = preference;
 	return ptrInstr;
 }
 
 //Creates and returns a new classroom pointer
-Classroom * BuildObj::CreateClassroomObj(char *roomNum, char *bldgNum, char *classTime)
+Classroom * BuildObj::CreateClassroom(string roomNum, string bldgNum, string classTime)
 {
 	Classroom *ptrRoom = new Classroom;
-	strcpy(ptrRoom->roomNum, roomNum);
-	strcpy(ptrRoom->bldgNum, bldgNum);
-	strcpy(ptrRoom->classTime, classTime);
+	ptrRoom->roomNum = roomNum;
+	ptrRoom->bldgNum = bldgNum;
+	ptrRoom->classTime = classTime;
 	return ptrRoom;
 }
