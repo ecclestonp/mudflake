@@ -45,7 +45,6 @@ retType * BuildObj::Create(string a, string b, string c, bool d, int type)
 			tempPtr->hasPreference = d;		//input boolean d
 			tempPtr->courseNum = a;			//input string a
 			tempPtr->preference = b;		//input string b
-			return coursePtr;
 			break;
 		case 2:						//Set type to 2 to get an instructor object
 			tempPtr->instructorName = a;		//input string a
