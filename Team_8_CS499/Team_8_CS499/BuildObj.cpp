@@ -7,7 +7,6 @@
 #include "Classroom.h"
 #include "Course.h"
 #include "Instructor.h"
-#include <stdio.h>
 #include <string>
 using namespace std;
 
@@ -38,30 +37,28 @@ template <class retType>
 //Use the strings you need for the object you are building based on the below implementation
 retType * BuildObj::Create(string a, string b, string c, bool d, int type)
 {
+	retType *tempPtr = new retType;				//create pointer of specified type
+	
 	switch(type)
 	{
 		case 1:						//Set type to 1 to get a course object
-			Course *coursePtr = new Course;
-			coursePtr->hasPreference = d;		//input boolean d
-			coursePtr->courseNum = a;		//input string a
-			coursePtr->preference = b;		//input string b
+			tempPtr->hasPreference = d;		//input boolean d
+			tempPtr->courseNum = a;			//input string a
+			tempPtr->preference = b;		//input string b
 			return coursePtr;
 			break;
 		case 2:						//Set type to 2 to get an instructor object
-			Instructor *instrPtr = new Instructor;
-			instrPtr->instructorName = a;		//input string a
-			instrPtr->hasPreference = d;		//input boolean d
-			instPtr->preference = b;		//input string b
-			return instrPtr;
+			tempPtr->instructorName = a;		//input string a
+			tempPtr->hasPreference = d;		//input boolean d
+			tempPtr->preference = b;		//input string b
 			break;
 		case 3:						//Set type to 3 to get a classroom object
-			Classroom *roomPtr = new Classroom;
-			roomPtr->roomNum = a;			//input string a
-			roomPtr->bldgNum = b;			//input string b
-			roomPtr->classTime = c;			//input string c
-			return roomPtr;
+			tempPtr->roomNum = a;			//input string a
+			tempPtr->bldgNum = b;			//input string b
+			tempPtr->classTime = c;			//input string c
 			break;
 		default:
-			return NULL;
+			return NULL;				//return NULL if invalid type
 	}
+	return tempPtr;
 }
