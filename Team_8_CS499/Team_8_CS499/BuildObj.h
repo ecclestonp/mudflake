@@ -10,7 +10,7 @@
 using namespace std;
 
 #pragma once
-template <class retType>
+
 class BuildObj
 {
 	private:
@@ -19,6 +19,7 @@ class BuildObj
 		BuildObj();
 		~BuildObj();
 		
+		template <class retType>
 		//Now this uses templates to create any of the 3 object types with one function
 		retType * Create(string a, string b, string c, bool d, int type);	
 };
