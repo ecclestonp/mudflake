@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
-#include "Department.h"
+#include "Schedule.h"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ void splitString(string line, char delim, vector<string> &vec)
 	}
 }
 
-void splitString(string line, char delim, Department *dept, int state)
+void splitString(string line, char delim, Schedule *dept, int state)
 {
 	string temp;
 	stringstream stream(line);
@@ -36,7 +36,7 @@ void splitString(string line, char delim, Department *dept, int state)
 	}
 }
 
-void parseInput(Department *dept)
+void parseInput(Schedule *dept)
 {
 	char state = 0;
 	ifstream input;
@@ -84,7 +84,7 @@ void parseInput(Department *dept)
 
 int main(void) 
 {
-	Department dept;
+	Schedule dept;
 	parseInput(&dept);
 
 	for(int x = 0; x < dept.courses.size(); x++)

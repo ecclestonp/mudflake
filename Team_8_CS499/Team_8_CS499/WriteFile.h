@@ -18,9 +18,9 @@ class WriteFile
 		WriteFile(char *fileName);
 		~WriteFile();
 
-		//Input array of strings, could also use vectors
+		//Input array of std::strings, could also use vectors
 		//Input name of department and number of courses
-		void writeToFile(string theData[][5], string department, int numCourses);
+		void writeToFile(std::string theData[][5], std::string department, int numCourses);
 };
 
 #endif

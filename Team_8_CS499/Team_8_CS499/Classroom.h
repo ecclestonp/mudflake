@@ -3,7 +3,7 @@
 //Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
 #pragma once
-#include "Department.h"
+#include "Schedule.h"
 #include <string>
 using namespace std;
 
