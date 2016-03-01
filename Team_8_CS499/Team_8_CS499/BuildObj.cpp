@@ -4,9 +4,6 @@
 //Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
 #include "BuildObj.h"
-#include "Classroom.h"
-#include "Course.h"
-#include "Instructor.h"
 #include <string>
 using namespace std;
 

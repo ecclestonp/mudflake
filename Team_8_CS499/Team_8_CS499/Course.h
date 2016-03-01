@@ -13,6 +13,9 @@ public:
 	std::string profName;		//professor name
 	bool hasPreference;		//1 if there is a prefence, 0 if not
 	std::string preference;		//NULL if no preference, contains string of preference if there is one
+
+	/*Course();
+	~Course();*/
 	Course(std::string courseName);
 	Course(std::string courseName, std::string profName);
 };

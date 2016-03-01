@@ -2,6 +2,16 @@
 
 using namespace std;
 
+Course::Course()
+{
+	//do nothing
+}
+
+Course::~Course()
+{
+	//do nothing
+}
+
 Course::Course(string courseName)
 {
 	courseNum = courseName;
