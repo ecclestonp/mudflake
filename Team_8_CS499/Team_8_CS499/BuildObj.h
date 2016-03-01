@@ -3,23 +3,20 @@
 //CS499 Senior Project
 //Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
-#include "Instructor.h"
-#include "Course.h"
 #include "Classroom.h"
+#include "Course.h"
+#include "Instructor.h"
 #include <string>
 using namespace std;
 
 #pragma once
 
+
 class BuildObj
 {
-	private:
-
 	public:
-		BuildObj();
-		~BuildObj();
-		
-		template <class retType>
-		//Now this uses templates to create any of the 3 object types with one function
-		retType * Create(string a, string b, string c, bool d, int type);	
+		//Functions to create the objects
+		Instructor * BuildInstructor(string instrName, string preference, bool prefBool);
+		Course * BuildCourse(string courseNum, string preference, bool prefBool);
+		Classroom * BuildClassroom(string roomNum, string bldg, string classTime);
 };
