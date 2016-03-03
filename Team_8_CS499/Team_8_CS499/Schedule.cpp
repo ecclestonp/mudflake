@@ -1,6 +1,7 @@
 #include "Schedule.h"
 #include <string>
 #include <iostream>
+#include <initializer_list>
 
 using namespace std;
 
@@ -8,9 +9,9 @@ bool Schedule::setCourseProfessor(string courseName, string professor)
 {
 	for(int x = 0; x < Schedule::courses.size(); x++)
 	{
-		if (!courses.at(x).courseNum.compare(courseName))
+		if (!courses.at(x)->courseNum.compare(courseName))
 		{
-			courses.at(x).profName = professor;
+			courses.at(x)->profName = professor;
 			return true;
 		}
 	}
@@ -85,7 +86,48 @@ bool Schedule::linkCourseProfessor(vector<Course> courses, vector<Instructor> pr
 	return false;
 }
 
+// Super shitty brute force algo for making a schedule
+// 11/10 - IGN
 void Schedule::makeSchedule()
 {
-	
+	Course::TIME possibleTimes[] = {Course::MW8, Course::MW9, Course::MW11, Course::MW12, Course::MW2, Course::MW3, Course::MW5, Course::TR8, Course::TR9, Course::TR11, Course::TR12, Course::TR2, Course::TR3, Course::TR5};
+	for (Course *c : courses)
+	{
+		for (Course::TIME possibleTime : possibleTimes)
+		{
+			bool badTime = false;
+			for (Course *t : courses)
+			{
+				if (!c->profName.compare(t->profName) && possibleTime == t->courseTime)
+				{
+					badTime = true;
+					break;
+				}
+			}
+
+			if(!badTime)
+			{
+				c->courseTime = possibleTime;
+				break;
+			}
+		}
+			
+	}
+}
+
+void Schedule::toString()
+{
+	cout << "++++++++++++++++++++++++++++++++++++++++++" << endl;
+	cout << "+             Schedule dump              +" << endl;
+	cout << "++++++++++++++++++++++++++++++++++++++++++" << endl;
+	cout << "+ " << courses.size() << " courses and " << professors.size() << " professors loaded." << endl;
+	cout << "++++++++++++++++++++++++++++++++++++++++++" << endl;
+	for (Course *c : courses)
+	{
+		cout << "------  " << c->courseNum << "  ------" << endl;
+		cout << "Taught in room XXX" << endl;
+		cout << "by " << c->profName << ", at " << c->getTime() << endl;
+		cout << "----------------------" << endl;
+	}
+
 }

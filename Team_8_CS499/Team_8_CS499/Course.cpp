@@ -15,10 +15,30 @@ Course::~Course()
 Course::Course(string courseName)
 {
 	courseNum = courseName;
+	courseTime = UNASSIGNED;
 }
 
 Course::Course(std::string courseName, std::string profName)
 {
 	courseNum = courseName;
 	Course::profName = profName;
+}
+
+std::string Course::getTime()
+{
+	switch (courseTime)
+	{
+		case Course::MW8:
+			return "MW8";
+		case Course::MW9:
+			return "MW9";
+		case Course::MW11:
+			return "MW11";
+		case Course::MW12:
+			return "MW12";
+
+		//... With my current algorithm, it never selects beyond there. I plan on changing this ghetto code anyways.
+		default:
+			return "UNASSIGNED";
+	}
 }

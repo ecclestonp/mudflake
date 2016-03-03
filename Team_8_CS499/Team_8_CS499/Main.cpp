@@ -30,7 +30,7 @@ void splitString(string line, char delim, Schedule *dept, int state)
 		temp = temp.substr(0,temp.find_last_not_of("\n\r\t")+1);
 		if(state == 2)
 		{
-			Course c(temp);
+			Course *c = new Course(temp);
 			dept->courses.push_back(c);
 		}
 	}
@@ -70,6 +70,7 @@ void parseInput(Schedule *dept)
 				splitString(strn, ',', temp);
 				tempPreference = temp.at(temp.size() - 1).substr(temp.at(temp.size() - 1).find_first_of("-") + 2);
 				temp.at(temp.size() - 1) = temp.at(temp.size() - 1).substr(0, temp.at(temp.size() - 1).find_first_of("-") - 1);
+				dept->professors.push_back(temp.at(0));
 				for(int x = 1; x < temp.size(); x++)/* Start at 1 because the professor's name is temp.at(0) */
 				{
 					if(!dept->setCourseProfessor(temp.at(x),temp.at(0)))
@@ -78,17 +79,12 @@ void parseInput(Schedule *dept)
 			break;
 		}
 	}
-
-	cout << "Number of courses parsed: " << dept->courses.size() << endl;
 }
 
 int main(void) 
 {
 	Schedule dept;
 	parseInput(&dept);
-
-	for(int x = 0; x < dept.courses.size(); x++)
-	{
-		cout << dept.courses.at(x).courseNum << ", taught by " << dept.courses.at(x).profName << endl;
-	}
+	dept.makeSchedule();
+	dept.toString();
 }
