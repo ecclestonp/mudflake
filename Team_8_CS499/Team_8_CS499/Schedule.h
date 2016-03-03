@@ -5,9 +5,9 @@
 #pragma once
 #include "Classroom.h"
 #include "Course.h"
-#include "BuildObj.h"
 #include "Instructor.h"
 #include "WriteFile.h"
+#include "BuildObj.h"
 #include <vector>
 
 //Define structure for dept
@@ -15,8 +15,12 @@ class Schedule
 {
 public:
 	std::string deptName;
-	//vector<Classroom> classrooms;
 	vector<Course> courses;
-	vector<std::string> professors;
-	bool setCourseProfessor(std::string courseName, std::string professor);
+	vector<string> professors;
+	vector<Classroom> classrooms;
+
+	bool setCourseProfessor(string courseName, string professor);
+	bool linkCourseProfessor(vector<Course> courses, vector<Instructor> professors);
+	bool AddObj(string Identifier);
+	void makeSchedule();
 };

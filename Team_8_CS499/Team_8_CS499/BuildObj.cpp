@@ -4,60 +4,57 @@
 //Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
 #include "BuildObj.h"
-#include "Classroom.h"
-#include "Course.h"
-#include "Instructor.h"
 #include <string>
 using namespace std;
 
-//Default constructor
-BuildObj::BuildObj()
+/*
+Example usage:
+//You only need to create one instance of the builder in the program
+BuildObj testbuilder;
+
+//Only need to create one of each of these, then pass the memory address into your vector
+//reuse the pointer each time you create the next object
+Course *coursePtr;
+Classroom *classPtr;
+Instructor *instrPtr;
+
+coursePtr = testbuilder.BuildCourse("CS499","Requires room 324", true);
+classPtr = testbuilder.BuildClassroom("324","Tech Hall","5:30-6:50");
+instrPtr = testbuilder.BuildInstructor("Dr. Coleman","",false);
+
+//delete each of these when done
+*/
+
+
+//Create and return instructor
+//pass arguments instructor name string, preference string, and preference bool if there is a pref
+Instructor * BuildObj::BuildInstructor(string instrName, string preference, bool prefBool)
 {
-	//Do nothing
+	Instructor *instrPtr = new Instructor;
+	instrPtr->instructorName = instrName;
+	instrPtr->hasPreference = prefBool;
+	instrPtr->preference = preference;
+	return instrPtr;
 }
 
-BuildObj::~BuildObj()
+//Create and return course
+//pass arguments course number string, preference string, and preference bool if there is a pref
+Course * BuildObj::BuildCourse(string courseNum, string preference, bool prefBool)
 {
-	//Do Nothing
+	Course *coursePtr = new Course;
+	coursePtr->hasPreference = prefBool;
+	coursePtr->courseNum = courseNum;
+	coursePtr->preference = preference;
+	return coursePtr;
 }
 
-//This is now reworked to use a template
-
-//To create an object, make an instance of the BuildObj class
-//Then ask it to create the object you need using the create function as in the below example and it will get a pointer:
-//Example:
-//BuildObj testbuilder;
-//Course *testcourse;
-//testcourse = testbuilder.Create<Course>("CS499", "Requires room 324", "", true, 1);
-//
-//For the last argument include int 1, 2 or 3 for which item you need built
-
-template <class retType>
-//Takes up to 3 strings, a boolean and an integer for the type of object
-//Use the strings you need for the object you are building based on the below implementation
-retType * BuildObj::Create(string a, string b, string c, bool d, int type)
+//Create and return classroom
+//pass arguments room number string, building string, and class time string
+Classroom * BuildObj::BuildClassroom(string roomNum, string bldg, string classTime)
 {
-	retType *tempPtr = new retType;				//create pointer of specified type
-	
-	switch(type)
-	{
-		case 1:						//Set type to 1 to get a course object
-			tempPtr->hasPreference = d;		//input boolean d
-			tempPtr->courseNum = a;			//input string a
-			tempPtr->preference = b;		//input string b
-			break;
-		case 2:						//Set type to 2 to get an instructor object
-			tempPtr->instructorName = a;		//input string a
-			tempPtr->hasPreference = d;		//input boolean d
-			tempPtr->preference = b;		//input string b
-			break;
-		case 3:						//Set type to 3 to get a classroom object
-			tempPtr->roomNum = a;			//input string a
-			tempPtr->bldgNum = b;			//input string b
-			tempPtr->classTime = c;			//input string c
-			break;
-		default:
-			return NULL;				//return NULL if invalid type
-	}
-	return tempPtr;
+	Classroom *roomPtr = new Classroom;
+	roomPtr->roomNum = roomNum;			
+	roomPtr->bldgNum = bldg;				
+	roomPtr->classTime = classTime;			
+	return roomPtr;
 }
