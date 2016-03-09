@@ -18,10 +18,13 @@ public:
 	vector<Course *> courses;
 	vector<string> professors;
 	vector<Classroom> classrooms;
+	vector<Instructor *> instructors;
 
 	bool setCourseProfessor(string courseName, string professor);
 	bool linkCourseProfessor(vector<Course> courses, vector<Instructor> professors);
 	bool AddObj(string Identifier);
 	void toString();
 	void makeSchedule();
+	void printProfessor();
+	void printCourses();
 };

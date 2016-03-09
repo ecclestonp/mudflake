@@ -1,3 +1,6 @@
+#include <string>
+#include <iostream>
+
 #include "Course.h"
 
 using namespace std;
@@ -41,4 +44,9 @@ std::string Course::getTime()
 		default:
 			return "UNASSIGNED";
 	}
+}
+
+void Course::printCourses()
+{
+	cout << courseNum << endl;
 }

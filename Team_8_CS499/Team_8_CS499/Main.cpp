@@ -7,6 +7,8 @@
 
 using namespace std;
 
+
+//use this to create professor objects
 void splitString(string line, char delim, vector<string> &vec)
 {
 	string temp;
@@ -19,8 +21,11 @@ void splitString(string line, char delim, vector<string> &vec)
 	}
 }
 
+//this function splits the courses, use 
 void splitString(string line, char delim, Schedule *dept, int state)
 {
+	BuildObj testbuilder;
+	Course *coursePtr;
 	string temp;
 	stringstream stream(line);
 
@@ -30,16 +35,23 @@ void splitString(string line, char delim, Schedule *dept, int state)
 		temp = temp.substr(0,temp.find_last_not_of("\n\r\t")+1);
 		if(state == 2)
 		{
-			Course *c = new Course(temp);
-			dept->courses.push_back(c);
+			//using a ptr, call the BuildObj function for course
+			coursePtr = testbuilder.BuildCourse(temp,"", false);
+			//push to back of course vector
+			dept->courses.push_back(coursePtr);
 		}
 	}
 }
 
 void parseInput(Schedule *dept)
 {
+	vector<Instructor> prof;
 	char state = 0;
 	ifstream input;
+
+	BuildObj testbuilder;
+	Instructor *instrPtr;
+
 	input.open("Dept1ClassData.csv");
 	string strn;
 	while(!input.eof())
@@ -67,10 +79,25 @@ void parseInput(Schedule *dept)
 			case 6:/*   Dr. Echo, CS 107, CS 226, CS 342 - Preference: Morning classes only */
 				vector<string> temp;
 				string tempPreference;
-				splitString(strn, ',', temp);
-				tempPreference = temp.at(temp.size() - 1).substr(temp.at(temp.size() - 1).find_first_of("-") + 2);
+				string instrPreference;
+
+				splitString(strn, ',', temp);//added passing the Schedule object, allows pushing of instructor object
+				tempPreference = temp.at(temp.size() - 1).substr(temp.at(temp.size() - 1).find_first_of("-") + 2); 
 				temp.at(temp.size() - 1) = temp.at(temp.size() - 1).substr(0, temp.at(temp.size() - 1).find_first_of("-") - 1);
-				dept->professors.push_back(temp.at(0));
+				if(tempPreference.find("None") != std::string::npos)
+				{
+					instrPreference = "None";
+					instrPtr = testbuilder.BuildInstructor(temp.at(0),instrPreference,false);
+				}
+				else
+				{
+					instrPreference = "Has Preference";
+					instrPtr = testbuilder.BuildInstructor(temp.at(0),instrPreference,true);
+				}
+
+				//creates instructor
+				dept->instructors.push_back(instrPtr);
+				//not sure what the following does
 				for(int x = 1; x < temp.size(); x++)/* Start at 1 because the professor's name is temp.at(0) */
 				{
 					if(!dept->setCourseProfessor(temp.at(x),temp.at(0)))
@@ -81,10 +108,13 @@ void parseInput(Schedule *dept)
 	}
 }
 
+
 int main(void) 
 {
 	Schedule dept;
 	parseInput(&dept);
-	dept.makeSchedule();
-	dept.toString();
+	//dept.makeSchedule();
+	//dept.toString();
+	dept.printCourses();
+	dept.printProfessor();
 }

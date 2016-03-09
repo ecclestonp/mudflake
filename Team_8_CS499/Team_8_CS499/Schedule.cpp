@@ -1,7 +1,7 @@
 #include "Schedule.h"
 #include <string>
 #include <iostream>
-#include <initializer_list>
+//#include <initializer_list>
 
 using namespace std;
 
@@ -130,4 +130,25 @@ void Schedule::toString()
 		cout << "----------------------" << endl;
 	}
 
+}
+
+void Schedule::printCourses()
+{
+	for(Course *c : courses)
+	{
+		//demonstrates all the following have been set
+		cout << c->courseNum << endl;
+		cout << c->preference << endl;
+		cout << c->profName << "\n" << endl;
+	}
+	
+}
+
+void Schedule::printProfessor()
+{
+	for(Instructor *i: instructors)
+	{
+		cout << i->instructorName << endl;
+		cout << i->preference << "\n" << endl;
+	}
 }

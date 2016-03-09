@@ -21,4 +21,5 @@ public:
 	Course(std::string courseName);
 	Course(std::string courseName, std::string profName);
 	std::string getTime();
+	void printCourses();
 };
