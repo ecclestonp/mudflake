@@ -108,10 +108,39 @@ void parseInput(Schedule *dept)
 	}
 }
 
+//Read given room file name and add all classrooms to dept
+void readRoomFile(char fName, Schedule *dept)
+{
+	ifstream iFile;
+	iFile.open(fName);
+	
+	string tempStr[50];
+	int i = 0;
+
+	while (!iFile.eof())
+	{
+		getline(iFile, tempStr[i], ',');
+		i++;
+	}
+	for (int j = 0; j < i; j+=2)
+	{
+		//building, room, time
+		dept->AddClassroom(tempStr[j], tempStr[j+1], "");
+	}
+	
+	iFile.close();
+	return;
+}
 
 int main(void) 
 {
 	Schedule dept;
+	
+	//Adds rooms with bldg from file
+	char fName[64];
+	strcpy(fName, "CSRoomList.csv");
+	readRoomFile(fName, &dept);
+	
 	parseInput(&dept);
 	//dept.makeSchedule();
 	//dept.toString();
