@@ -152,3 +152,24 @@ void Schedule::printProfessor()
 		cout << i->preference << "\n" << endl;
 	}
 }
+
+//Used for adding instructors via GUI
+void Schedule::AddInstructor(string iName, string preference, bool prefbool)
+{
+	instructors.push_back(addObject.BuildInstructor(iName, preference, prefbool));
+	return;
+}
+
+//used for adding rooms via GUI
+void Schedule::AddClassroom(string bldg, string room, string cTime)
+{
+	classrooms.push_back(addObject.BuildClassroom(room, bldg, cTime));
+	return;
+}
+
+//used for adding courses via GUI
+void Schedule::AddCourse(string cName, string preference, bool prefbool)
+{
+	courses.push_back(addObject.BuildCourse(cName, preference, prefbool));
+	return;
+}
