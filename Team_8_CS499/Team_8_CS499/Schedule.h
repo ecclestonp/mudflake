@@ -28,4 +28,7 @@ public:
 	void makeSchedule();
 	void printProfessor();
 	void printCourses();
+	void AddInstructor(string iName, string preference);
+	void AddClassroom(string bldg, string room);
+	void AddCourse(string courseNum, string preference);
 };
