@@ -17,8 +17,9 @@ public:
 	std::string deptName;
 	vector<Course *> courses;
 	vector<string> professors;
-	vector<Classroom> classrooms;
+	vector<Classroom *> classrooms;
 	vector<Instructor *> instructors;
+	BuildObj addObject;
 
 	bool setCourseProfessor(string courseName, string professor);
 	bool linkCourseProfessor(vector<Course> courses, vector<Instructor> professors);
