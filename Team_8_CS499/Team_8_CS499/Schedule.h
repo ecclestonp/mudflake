@@ -20,15 +20,15 @@ public:
 	vector<Classroom *> classrooms;
 	vector<Instructor *> instructors;
 	BuildObj addObject;
+	int scheduleArray[100][4];
 
 	bool setCourseProfessor(string courseName, string professor);
 	bool linkCourseProfessor(vector<Course> courses, vector<Instructor> professors);
-	bool AddObj(string Identifier);
 	void toString();
 	void makeSchedule();
 	void printProfessor();
 	void printCourses();
 	void AddInstructor(string iName, string preference, bool prefbool);
-	void AddClassroom(string bldg, string room, string cTime);
+	void AddClassroom(string bldg, string room, unsigned int cTimeMW, unsigned int cTimeTT);
 	void AddCourse(string courseNum, string preference, bool prefbool);
 };

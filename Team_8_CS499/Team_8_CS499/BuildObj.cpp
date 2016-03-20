@@ -50,11 +50,12 @@ Course * BuildObj::BuildCourse(string courseNum, string preference, bool prefBoo
 
 //Create and return classroom
 //pass arguments room number string, building string, and class time string
-Classroom * BuildObj::BuildClassroom(string roomNum, string bldg, string classTime)
+Classroom * BuildObj::BuildClassroom(string roomNum, string bldg, unsigned int classTimeMW, unsigned int classTimeTT)
 {
 	Classroom *roomPtr = new Classroom;
 	roomPtr->roomNum = roomNum;			
 	roomPtr->bldgNum = bldg;				
-	roomPtr->classTime = classTime;			
+	roomPtr->classTimeMW = classTimeMW;
+	roomPtr->classTimeTT = classTimeTT;
 	return roomPtr;
 }

@@ -10,7 +10,8 @@ using namespace std;
 class Classroom
 {
 public:
-	std::string roomNum;		//String for room number
-	std::string bldgNum;		//String of the building name/num that the room is located in
-	std::string classTime;	    //The time of the class for this instance of the room (new classroom struct needed for each time represented)
+	string roomNum;			//String for room number
+	string bldgNum;			//String of the building name/num that the room is located in
+	unsigned int classTimeMW;		//mon/weds bit flag times
+	unsigned int classTimeTT;		//tues/thursday bit flag times
 };
