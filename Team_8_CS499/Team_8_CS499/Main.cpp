@@ -119,11 +119,22 @@ void readRoomFile(char fName, Schedule *dept)
 
 	while (!iFile.eof())
 	{
-		getline(iFile, tempStr[i], ',');
+		//See if i is even
+		//If it is delim on comma
+		//else delim on newline char
+		if (i%2 == 0)
+		{
+			getline(iFile, tempstr[i], ',');
+		}
+		else 
+		{
+			getline(iFile, tempstr[i]);
+		}
 		i++;
 	}
 	for (int j = 0; j < i; j+=2)
 	{
+		//Add the strings from tempStr into the classrooms vector
 		//building, room, time
 		dept->AddClassroom(tempStr[j], tempStr[j+1], "");
 	}
