@@ -91,7 +91,7 @@ void parseInput(Schedule *dept)
 				}
 				else
 				{
-					instrPreference = "Has Preference";
+					instrPreference =  tempPreference.substr(12, tempPreference.find("\n"));//prefernce: starts at index 12. goes till new line
 					instrPtr = testbuilder.BuildInstructor(temp.at(0),instrPreference,true);
 				}
 
