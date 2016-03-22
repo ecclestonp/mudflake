@@ -51,6 +51,7 @@ void parseInput(Schedule *dept)
 
 	BuildObj testbuilder;
 	Instructor *instrPtr;
+	string coursePref;
 
 	input.open("Dept1ClassData.csv");
 	string strn;
@@ -75,6 +76,11 @@ void parseInput(Schedule *dept)
 			break;
 			case 4:/*   CS 342 must be taught in Technology Hall, room 342 */
 				//TODO: implement contstraints on a case-by-case basis
+				//currently only parses string for preference string, does not put in course
+				if(strn.find("must") != std::string::npos)//had issues with "Classroom preferences" string, used to make sure error handled
+				{
+					coursePref = strn.substr(43, strn.find("/n"));
+				}
 			break;
 			case 6:/*   Dr. Echo, CS 107, CS 226, CS 342 - Preference: Morning classes only */
 				vector<string> temp;
@@ -93,6 +99,7 @@ void parseInput(Schedule *dept)
 				{
 					instrPreference =  tempPreference.substr(12, tempPreference.find("\n"));//prefernce: starts at index 12. goes till new line
 					instrPtr = testbuilder.BuildInstructor(temp.at(0),instrPreference,true);
+					
 				}
 
 				//creates instructor
