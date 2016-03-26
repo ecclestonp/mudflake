@@ -31,8 +31,7 @@ instrPtr = testbuilder.BuildInstructor("Dr. Coleman","",false);
 Instructor * BuildObj::BuildInstructor(string instrName, string preference, bool prefBool)
 {
 	Instructor *instrPtr = new Instructor;
-	instrPtr->instructorName = instrName;
-	instrPtr->hasPreference = prefBool;
+	//instrPtr->instructorName = instrName;
 	instrPtr->preference = preference;
 	return instrPtr;
 }
@@ -42,7 +41,6 @@ Instructor * BuildObj::BuildInstructor(string instrName, string preference, bool
 Course * BuildObj::BuildCourse(string courseNum, string preference, bool prefBool)
 {
 	Course *coursePtr = new Course;
-	coursePtr->hasPreference = prefBool;
 	coursePtr->courseNum = courseNum;
 	coursePtr->preference = preference;
 	return coursePtr;

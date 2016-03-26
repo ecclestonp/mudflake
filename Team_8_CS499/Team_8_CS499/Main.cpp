@@ -100,7 +100,7 @@ void parseInput(Schedule *dept)
 				//not sure what the following does
 				for(int x = 1; x < temp.size(); x++)/* Start at 1 because the professor's name is temp.at(0) */
 				{
-					if(!dept->setCourseProfessor(temp.at(x),temp.at(0)))
+					if(!dept->setCourseProfessor(temp.at(x), instrPtr))
 						cout << "Unable to set professor for " << temp.at(x) << endl;
 				}
 			break;
@@ -113,8 +113,8 @@ int main(void)
 {
 	Schedule dept;
 	parseInput(&dept);
-	//dept.makeSchedule();
-	//dept.toString();
-	dept.printCourses();
-	dept.printProfessor();
+	dept.makeSchedule();
+	dept.toString();
+	//dept.printCourses();
+	//dept.printProfessor();
 }

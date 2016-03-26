@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "Course.h"
+#include "Instructor.h"
 
 using namespace std;
 
@@ -18,13 +19,14 @@ Course::~Course()
 Course::Course(string courseName)
 {
 	courseNum = courseName;
-	courseTime = UNASSIGNED;
+	courseTime = MW8;
 }
 
-Course::Course(std::string courseName, std::string profName)
+Course::Course(std::string courseName, Instructor *instr)
 {
 	courseNum = courseName;
-	Course::profName = profName;
+	instructor = instr;
+	courseTime = MW8;
 }
 
 std::string Course::getTime()
