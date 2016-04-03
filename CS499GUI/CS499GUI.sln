@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CS499GUI", "CS499GUI\CS499GUI.vcxproj", "{9235DFAA-9414-4CBD-90C8-DB1D09E16A11}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9235DFAA-9414-4CBD-90C8-DB1D09E16A11}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9235DFAA-9414-4CBD-90C8-DB1D09E16A11}.Debug|Win32.Build.0 = Debug|Win32
+		{9235DFAA-9414-4CBD-90C8-DB1D09E16A11}.Release|Win32.ActiveCfg = Release|Win32
+		{9235DFAA-9414-4CBD-90C8-DB1D09E16A11}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
