@@ -94,16 +94,23 @@ void LoadParse::parseInput(char *fName, Schedule *dept)
 				splitString(strn, ',', temp);//added passing the Schedule object, allows pushing of instructor object
 				tempPreference = temp.at(temp.size() - 1).substr(temp.at(temp.size() - 1).find_first_of("-") + 2); 
 				temp.at(temp.size() - 1) = temp.at(temp.size() - 1).substr(0, temp.at(temp.size() - 1).find_first_of("-") - 1);
-				if(tempPreference.find("None") != std::string::npos)
+				if(temp.at(0).find("Faculty Assignments:") != std::string::npos)
 				{
-					instrPreference = "None";
-					instrPtr = testbuilder.BuildInstructor(temp.at(0),instrPreference,false);
+					//do nothing
 				}
 				else
 				{
-					instrPreference =  tempPreference.substr(12, tempPreference.find("\n"));//prefernce: starts at index 12. goes till new line
-					instrPtr = testbuilder.BuildInstructor(temp.at(0),instrPreference,true);
+					if(tempPreference.find("None") != std::string::npos)
+					{
+						instrPreference = "None";
+						instrPtr = testbuilder.BuildInstructor(temp.at(0),instrPreference,false, temp);
+					}
+					else
+					{
+						instrPreference =  tempPreference.substr(12, tempPreference.find("\n"));//prefernce: starts at index 12. goes till new line
+						instrPtr = testbuilder.BuildInstructor(temp.at(0),instrPreference,true, temp);
 					
+					}
 				}
 
 				//creates instructor

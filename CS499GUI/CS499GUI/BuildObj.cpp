@@ -5,6 +5,7 @@
 
 #include "BuildObj.h"
 #include <string>
+#include <vector>
 using namespace std;
 
 /*
@@ -28,12 +29,16 @@ instrPtr = testbuilder.BuildInstructor("Dr. Coleman","",false);
 
 //Create and return instructor
 //pass arguments instructor name string, preference string, and preference bool if there is a pref
-Instructor * BuildObj::BuildInstructor(string instrName, string preference, bool prefBool)
+Instructor * BuildObj::BuildInstructor(string instrName, string preference, bool prefBool, vector<string> linkCourses)
 {
 	Instructor *instrPtr = new Instructor;
 	instrPtr->instructorName = instrName;
 	instrPtr->hasPreference = prefBool;
 	instrPtr->preference = preference;
+	for(int i = 1; i <= linkCourses.size(); i++)
+	{
+		instrPtr->profCourse[i] = linkCourses.at(i);
+	}
 	return instrPtr;
 }
 

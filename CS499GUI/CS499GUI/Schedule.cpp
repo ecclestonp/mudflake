@@ -65,32 +65,24 @@ bool Schedule::setCourseProfessor(string courseName, string professor)
 
 //this function looks over all current course objects and compares to professor's courses
 //if a match is found, set the linker corresponding index to 1. index corresponds to course vector's index
-bool Schedule::linkCourseProfessor(vector<Course> courses, vector<Instructor> professors)
+bool Schedule::linkCourseProfessor()
 {
 	//need container to store reference between course and professor
-	string courseName;
-	int courseIndex;
-	int professorIndex;
-	int profCourse;
+	int profeCourse;
 
-	//outer loop for courses
-	for(courseIndex = 0; courseIndex < courses.size(); courseIndex++)//loops till at end of course vector
+	for(Course *c: courses)
 	{
-		for(professorIndex = 0; professorIndex < professors.size(); professorIndex++)
+		for(Instructor *i: instructors)
 		{
-			for(profCourse = 0; profCourse <= sizeof(professors[professorIndex].profCourse); profCourse++)//loops till at end of prof's courses
+			for(profeCourse = 0; profeCourse < i->profCourse.size(); profeCourse++)
 			{
-				//paul is my bff <3
-				if(courses[courseIndex].courseNum == professors[professorIndex].profCourse[profCourse])//check if the two strings are equal
+				if(c->courseNum.compare(i->profCourse[profeCourse]) == 0)
 				{
-					//if so, print out (for testing) and set the linker to 1 for existing
-					cout << professors[professorIndex].profCourse << " teaches " << courses[courseIndex].courseNum << endl;
-					professors[professorIndex].courseLinker[courseIndex] = 1;
-					break;
+					i->courseLinker[profeCourse] = 1;
 				}
 				else
 				{
-					//cout << "Checking next course" << endl;
+					i->courseLinker[profeCourse] = 0;
 				}
 			}
 		}
