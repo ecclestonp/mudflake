@@ -102,36 +102,20 @@ bool Schedule::linkCourseProfessor(vector<Course> courses, vector<Instructor> pr
 // Does not include preferences yet
 void Schedule::makeSchedule()
 {
-	/*Course::TIME possibleTimes[] = {Course::MW8, Course::MW9, Course::MW11, Course::MW12, Course::MW2, Course::MW3, Course::MW5, Course::TR8, Course::TR9, Course::TR11, Course::TR12, Course::TR2, Course::TR3, Course::TR5};
-	for (Course *c : courses)
-	{
-		for (Course::TIME possibleTime : possibleTimes)
-		{
-			bool badTime = false;
-			for (Course *t : courses)
-			{
-				if (!c->profName.compare(t->profName) && possibleTime == t->courseTime)
-				{
-					badTime = true;
-					break;
-				}
-			}
-
-			if(!badTime)
-			{
-				c->courseTime = possibleTime;
-				break;
-			}
-		}
-			
-	}*/
-
 	//Set schedule array
 	for (int i = 0; i < 100; i++)
 	{
 		for (int j = 0; j < 4; j++)
 		{
 			scheduleArray[i][j] = 999;
+		}
+	}
+	for (int i = 0; i < this->courses.size(); i++)
+	{
+		Course *c = courses[i];
+		if (c->hasPreference)
+		{
+			_CrtDbgBreak();
 		}
 	}
 
@@ -150,6 +134,10 @@ void Schedule::makeSchedule()
 	//For each course
 	for (int i = 0; i < this->courses.size(); i++)
 	{
+		// If has preference, should already be scheduled
+		if(this->courses[i]->hasPreference)
+			continue;
+
 		//check for a classroom/time opening and assign it
 		for (int j = 0; j <= this->classrooms.size(); j++)
 		{

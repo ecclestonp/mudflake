@@ -55,7 +55,10 @@ void LoadParse::parseInput(char *fName, Schedule *dept)
 
 	BuildObj testbuilder;
 	Instructor *instrPtr;
-	string coursePref;
+	/* Only supports a max of 15 individual course prefs. Hardcoded */
+	string courseName[15];
+	string coursePref[15];
+	size_t courseIdx = 0;
 
 	input.open(fName);
 	string strn;
@@ -83,7 +86,8 @@ void LoadParse::parseInput(char *fName, Schedule *dept)
 				//currently only parses string for preference string, does not put in course
 				if(strn.find("must") != std::string::npos)//had issues with "Classroom preferences" string, used to make sure error handled
 				{
-					coursePref = strn.substr(43, strn.find("/n"));
+					courseName[courseIdx] = strn.substr(1, strn.find(" must")-1);
+					coursePref[courseIdx++] = strn.substr(43, strn.find("/n"));
 				}
 			break;
 			case 6:/*   Dr. Echo, CS 107, CS 226, CS 342 - Preference: Morning classes only */
@@ -111,6 +115,13 @@ void LoadParse::parseInput(char *fName, Schedule *dept)
 				//not sure what the following does
 				for(int x = 1; x < temp.size(); x++)/* Start at 1 because the professor's name is temp.at(0) */
 				{
+					for(int y = 0; y < courseIdx; y++)
+					{
+						if(!temp.at(x).compare(courseName[y]))
+						{
+							/* TODO: we found a match for the preference at the top of the file. */
+						}
+					}
 					if(!dept->setCourseProfessor(temp.at(x),temp.at(0)))
 					{
 						//cout << "Unable to set professor for " << temp.at(x) << endl;
