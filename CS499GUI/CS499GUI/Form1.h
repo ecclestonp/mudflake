@@ -713,6 +713,7 @@ private: System::Void toolStripButton3_Click(System::Object^  sender, System::Ev
 						System::String ^ theCourse = gcnew String(dept->courses[dept->scheduleArray[i][1]]->courseNum.c_str());
 						System::String ^ theBldg = gcnew String(dept->classrooms[dept->scheduleArray[i][0]]->bldgNum.c_str());
 						System::String ^ theRoom = gcnew String(dept->classrooms[dept->scheduleArray[i][0]]->roomNum.c_str());
+						System::String ^ theInstr = gcnew String(dept->courses[dept->scheduleArray[i][1]]->profName.c_str());
 
 						//check to see which time it is assigned and print it
 						//mon/weds
@@ -799,7 +800,7 @@ private: System::Void toolStripButton3_Click(System::Object^  sender, System::Ev
 							theTime = "5:20-6:40";
 						}
 						//Add the row to the GUI table
-						this->dataGridView1->Rows->Insert(i, theCourse, "TEMP Instructor", theBldg, theRoom, theDay, theTime);
+						this->dataGridView1->Rows->Insert(i, theCourse, theInstr, theBldg, theRoom, theDay, theTime);
 					}
 				 //Enable the save button now
 				 this->toolStripButton4->Enabled = true;

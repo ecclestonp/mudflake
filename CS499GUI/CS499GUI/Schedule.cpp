@@ -62,6 +62,21 @@ bool Schedule::setCourseProfessor(string courseName, string professor)
 	}
 	return false;
 }
+#define TRUE true
+
+bool Schedule::setCoursePreference(string courseName, string pref)
+{
+	for(int x = 0; x < Schedule::courses.size(); x++)
+	{
+		if (!courses.at(x)->courseNum.compare(courseName))
+		{
+			courses.at(x)->preference = pref;
+			courses.at(x)->hasPreference = TRUE;
+			return true;
+		}
+	}
+	return false;
+}
 
 //this function looks over all current course objects and compares to professor's courses
 //if a match is found, set the linker corresponding index to 1. index corresponds to course vector's index
@@ -113,12 +128,134 @@ void Schedule::makeSchedule()
 	for (int i = 0; i < this->courses.size(); i++)
 	{
 		Course *c = courses[i];
+		//TODO: shit breaks if course and instructor have preference
 		if (c->hasPreference)
 		{
-			_CrtDbgBreak();
+			unsigned int bitPos = 0x00000001;
+			// preference = "room 342"
+			//check for a classroom/time opening and assign it
+			for (int j = 0; j <= this->classrooms.size(); j++)
+			{
+				if (classrooms[j]->roomNum.compare(c->preference.substr(5,3)))
+					continue;
+				bitPos = 0x00000001;
+				//Mon/Weds time checks
+				while (bitPos != 0x00000000)
+				{
+					//first try for a mon/weds time slot
+					if ((this->classrooms[j]->classTimeMW & bitPos) == 0)
+					{
+						//Set to location in vector for course because time not yet used
+						scheduleArray[i][0] = j;		//room vec location
+						scheduleArray[i][1] = i;		//course vec location
+						scheduleArray[i][2] = bitPos;	//time flag
+						scheduleArray[i][3] = 1;		//1 for mon/weds
+						//update flag to show that time is now taken
+						this->classrooms[j]->classTimeMW = this->classrooms[j]->classTimeMW | bitPos;
+						bitPos = 0;
+						j = classrooms.size();
+					}
+					//Then check tues/thurs instead
+					else if ((this->classrooms[j]->classTimeTT & bitPos) == 0)
+					{
+						//Set to location in vector for course because time not yet used
+						scheduleArray[i][0] = j;		//room vec location
+						scheduleArray[i][1] = i;		//course vec location
+						scheduleArray[i][2] = bitPos;	//time flag
+						scheduleArray[i][3] = 2;		//2 for tues/thurs
+						//update flag in classroom to show that time is now taken
+						this->classrooms[j]->classTimeTT = this->classrooms[j]->classTimeTT | bitPos;
+						bitPos = 0;
+						j = classrooms.size();
+					}
+					else
+					{
+						//No time slot so shift bitPos left 4 bits
+						bitPos <<= 4;
+					}
+				}
+			}
 		}
 	}
 
+	for (int i = 1; i < this->instructors.size(); i++)
+	{
+		Instructor *instr = instructors[i];
+		if (instr->hasPreference)/*Morning classes only*/
+		{
+			unsigned int bitPos = 0x00000001;
+			bool ttonly = false;
+			bool mwonly = false;
+
+			if(!instr->preference.compare("Afternoon classes only"))
+			{
+				bitPos = 0x00001000;
+				ttonly = mwonly = true;
+			}
+			else if (!instr->preference.compare("Evening classes only"))
+			{
+				bitPos = 0x01000000;
+				ttonly = mwonly = true;
+			}
+			else if (!instr->preference.compare("All Tues-Thurs classes"))
+			{
+				ttonly = true;
+			}
+			else // Assuming it's All Mon-Wed classes...
+			{
+				mwonly = true;
+			}
+
+			for (int tcourse = 0; tcourse < this->courses.size(); tcourse++)
+			{
+				Course *_c = courses[tcourse];
+				//TODO: shit breaks if course and instructor have preference
+				if (_c->profName.compare(instr->instructorName))
+					continue;
+				_c->hasPreference = true;
+				// preference = "room 342"
+				//check for a classroom/time opening and assign it
+				for (int j = 0; j <= this->classrooms.size(); j++)
+				{
+					//Mon/Weds time checks
+					while (bitPos != 0x00000000)
+					{
+						//first try for a mon/weds time slot
+						if ((this->classrooms[j]->classTimeMW & bitPos) == 0 && mwonly)
+						{
+							//Set to location in vector for course because time not yet used
+							scheduleArray[tcourse][0] = j;		//room vec location
+							scheduleArray[tcourse][1] = tcourse;		//course vec location
+							scheduleArray[tcourse][2] = bitPos;	//time flag
+							scheduleArray[tcourse][3] = 1;		//1 for mon/weds
+							//update flag to show that time is now taken
+							this->classrooms[j]->classTimeMW = this->classrooms[j]->classTimeMW | bitPos;
+							bitPos = 0;
+							j = classrooms.size();
+						}
+						//Then check tues/thurs instead
+						else if ((this->classrooms[j]->classTimeTT & bitPos) == 0 && ttonly)
+						{
+							//Set to location in vector for course because time not yet used
+							scheduleArray[tcourse][0] = j;		//room vec location
+							scheduleArray[tcourse][1] = tcourse;		//course vec location
+							scheduleArray[tcourse][2] = bitPos;	//time flag
+							scheduleArray[tcourse][3] = 2;		//2 for tues/thurs
+							//update flag in classroom to show that time is now taken
+							this->classrooms[j]->classTimeTT = this->classrooms[j]->classTimeTT | bitPos;
+							bitPos = 0;
+							j = classrooms.size();
+						}
+						else
+						{
+							//No time slot so shift bitPos left 4 bits
+							bitPos <<= 4;
+						}
+					}
+				}
+			}
+		}
+	}
 	/*
 	Time bit positions 1 hour 20 min increments (hard coded correspondence for now):
 	0x00000001 = 8 - 9:20

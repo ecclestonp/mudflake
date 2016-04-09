@@ -32,5 +32,7 @@ public:
 	void AddInstructor(string iName, string preference, bool prefbool);
 	void AddClassroom(string bldg, string room, unsigned int cTimeMW, unsigned int cTimeTT);
 	void AddCourse(string courseNum, string preference, bool prefbool);
+	
+	bool setCoursePreference(string courseName, string pref);
 	void ClearSchedule();
 };

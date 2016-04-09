@@ -98,6 +98,7 @@ void LoadParse::parseInput(char *fName, Schedule *dept)
 				splitString(strn, ',', temp);//added passing the Schedule object, allows pushing of instructor object
 				tempPreference = temp.at(temp.size() - 1).substr(temp.at(temp.size() - 1).find_first_of("-") + 2); 
 				temp.at(temp.size() - 1) = temp.at(temp.size() - 1).substr(0, temp.at(temp.size() - 1).find_first_of("-") - 1);
+
 				if(tempPreference.find("None") != std::string::npos)
 				{
 					instrPreference = "None";
@@ -112,21 +113,16 @@ void LoadParse::parseInput(char *fName, Schedule *dept)
 
 				//creates instructor
 				dept->instructors.push_back(instrPtr);
-				//not sure what the following does
+				//not sure what the following does$
 				for(int x = 1; x < temp.size(); x++)/* Start at 1 because the professor's name is temp.at(0) */
 				{
-					for(int y = 0; y < courseIdx; y++)
-					{
-						if(!temp.at(x).compare(courseName[y]))
-						{
-							/* TODO: we found a match for the preference at the top of the file. */
-						}
-					}
 					if(!dept->setCourseProfessor(temp.at(x),temp.at(0)))
 					{
 						//cout << "Unable to set professor for " << temp.at(x) << endl;
 					}
 				}
+				for (int x = 0; x < courseIdx; x++)
+						dept->setCoursePreference(courseName[x],coursePref[x]);
 			break;
 		}
 	}
