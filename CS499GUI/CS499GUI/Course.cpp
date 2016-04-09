@@ -7,6 +7,7 @@ using namespace std;
 
 Course::Course()
 {
+	alreadyScheduled = false;
 	//do nothing
 }
 
@@ -19,10 +20,12 @@ Course::Course(string courseName)
 {
 	courseNum = courseName;
 	courseTime = UNASSIGNED;
+	alreadyScheduled = false;
 }
 
 Course::Course(std::string courseName, std::string profName)
 {
+	alreadyScheduled = false;
 	courseNum = courseName;
 	Course::profName = profName;
 }
