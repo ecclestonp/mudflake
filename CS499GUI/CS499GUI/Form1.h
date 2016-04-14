@@ -837,8 +837,8 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 			bool prefbool = false;
 			msclr::interop::marshal_context context;
 			string instrName = context.marshal_as<std::string>(this->textBox1->Text);
-			string instrPref = context.marshal_as<std::string>(this->comboBox2->SelectedText);
-			if (this->checkBox1->Checked)
+			string instrPref = context.marshal_as<std::string>(this->comboBox2->Text);
+			if (this->checkBox1->Checked == true)
 			{
 				prefbool = true;
 			}
@@ -852,8 +852,8 @@ private: System::Void button5_Click(System::Object^  sender, System::EventArgs^ 
 			bool prefbool = false;
 			msclr::interop::marshal_context context;
 			string courseNum = context.marshal_as<std::string>(this->textBox3->Text);
-			string instrName = context.marshal_as<std::string>(this->comboBox1->SelectedText);
-			if (this->checkBox1->Checked)
+			string instrName = context.marshal_as<std::string>(this->comboBox1->Text);
+			if (this->checkBox1->Checked == true)
 			{
 				prefbool = true;
 			}
