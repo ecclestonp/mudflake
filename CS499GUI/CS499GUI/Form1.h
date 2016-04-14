@@ -77,7 +77,7 @@ namespace CS499GUI {
 	private: System::Windows::Forms::TextBox^  textBox3;
 	private: System::Windows::Forms::TabPage^  tabPage4;
 	private: System::Windows::Forms::CheckBox^  checkBox1;
-	private: System::Windows::Forms::TextBox^  textBox6;
+
 	private: System::Windows::Forms::CheckBox^  checkBox2;
 	private: System::Windows::Forms::DataGridView^  dataGridView1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Course;
@@ -89,7 +89,7 @@ namespace CS499GUI {
 	private: System::Windows::Forms::DataGridView^  dataGridView2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  CourseNum;
 	private: System::Windows::Forms::DataGridView^  dataGridView4;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  InstructorName;
+
 	private: System::Windows::Forms::DataGridView^  dataGridView3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Building;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  RoomNum;
@@ -105,6 +105,12 @@ namespace CS499GUI {
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::ComboBox^  comboBox1;
 	private: System::Windows::Forms::ComboBox^  comboBox2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  InstructorName;
+	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Label^  label4;
+	private: System::Windows::Forms::Label^  label5;
+	private: System::Windows::Forms::ComboBox^  comboBox3;
 
 	private:
 		/// <summary>
@@ -138,20 +144,24 @@ namespace CS499GUI {
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabControl2 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->dataGridView4 = (gcnew System::Windows::Forms::DataGridView());
 			this->InstructorName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
 			this->CourseNum = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView3 = (gcnew System::Windows::Forms::DataGridView());
 			this->Building = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->RoomNum = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -189,15 +199,14 @@ namespace CS499GUI {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(2, 6);
+			this->textBox1->Location = System::Drawing::Point(5, 18);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(200, 20);
 			this->textBox1->TabIndex = 7;
-			this->textBox1->Text = L"Instructor Name";
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(103, 77);
+			this->button3->Location = System::Drawing::Point(103, 91);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(100, 20);
 			this->button3->TabIndex = 4;
@@ -212,7 +221,7 @@ namespace CS499GUI {
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(103, 58);
+			this->button4->Location = System::Drawing::Point(103, 85);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(100, 20);
 			this->button4->TabIndex = 5;
@@ -222,19 +231,17 @@ namespace CS499GUI {
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(5, 32);
+			this->textBox2->Location = System::Drawing::Point(5, 60);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(200, 20);
 			this->textBox2->TabIndex = 8;
-			this->textBox2->Text = L"Room Number";
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(5, 6);
+			this->textBox4->Location = System::Drawing::Point(5, 20);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(200, 20);
 			this->textBox4->TabIndex = 10;
-			this->textBox4->Text = L"Building Number";
 			// 
 			// tabPage1
 			// 
@@ -257,7 +264,7 @@ namespace CS499GUI {
 			this->dataGridView1->Location = System::Drawing::Point(0, 0);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
-			this->dataGridView1->Size = System::Drawing::Size(554, 354);
+			this->dataGridView1->Size = System::Drawing::Size(562, 354);
 			this->dataGridView1->TabIndex = 0;
 			// 
 			// Course
@@ -325,6 +332,7 @@ namespace CS499GUI {
 			// 
 			// tabPage2
 			// 
+			this->tabPage2->Controls->Add(this->label4);
 			this->tabPage2->Controls->Add(this->comboBox2);
 			this->tabPage2->Controls->Add(this->dataGridView4);
 			this->tabPage2->Controls->Add(this->checkBox1);
@@ -338,32 +346,46 @@ namespace CS499GUI {
 			this->tabPage2->Text = L"Add Instructor";
 			this->tabPage2->UseVisualStyleBackColor = true;
 			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(6, 3);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(85, 13);
+			this->label4->TabIndex = 13;
+			this->label4->Text = L"Instructor Name:";
+			// 
 			// comboBox2
 			// 
 			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Location = System::Drawing::Point(2, 51);
+			this->comboBox2->Location = System::Drawing::Point(5, 60);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(200, 21);
 			this->comboBox2->TabIndex = 12;
 			// 
 			// dataGridView4
 			// 
+			this->dataGridView4->AllowUserToAddRows = false;
+			this->dataGridView4->AllowUserToDeleteRows = false;
 			this->dataGridView4->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView4->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) {this->InstructorName});
-			this->dataGridView4->Location = System::Drawing::Point(2, 103);
+			this->dataGridView4->Location = System::Drawing::Point(2, 117);
 			this->dataGridView4->Name = L"dataGridView4";
-			this->dataGridView4->Size = System::Drawing::Size(200, 174);
+			this->dataGridView4->ReadOnly = true;
+			this->dataGridView4->Size = System::Drawing::Size(200, 160);
 			this->dataGridView4->TabIndex = 11;
 			// 
 			// InstructorName
 			// 
 			this->InstructorName->HeaderText = L"Instructor";
 			this->InstructorName->Name = L"InstructorName";
+			this->InstructorName->ReadOnly = true;
+			this->InstructorName->Width = 150;
 			// 
 			// checkBox1
 			// 
 			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(5, 29);
+			this->checkBox1->Location = System::Drawing::Point(5, 41);
 			this->checkBox1->Name = L"checkBox1";
 			this->checkBox1->Size = System::Drawing::Size(106, 17);
 			this->checkBox1->TabIndex = 9;
@@ -372,10 +394,11 @@ namespace CS499GUI {
 			// 
 			// tabPage3
 			// 
+			this->tabPage3->Controls->Add(this->label5);
+			this->tabPage3->Controls->Add(this->comboBox3);
 			this->tabPage3->Controls->Add(this->label1);
 			this->tabPage3->Controls->Add(this->comboBox1);
 			this->tabPage3->Controls->Add(this->dataGridView2);
-			this->tabPage3->Controls->Add(this->textBox6);
 			this->tabPage3->Controls->Add(this->checkBox2);
 			this->tabPage3->Controls->Add(this->button5);
 			this->tabPage3->Controls->Add(this->textBox3);
@@ -387,29 +410,49 @@ namespace CS499GUI {
 			this->tabPage3->Text = L"Add Course";
 			this->tabPage3->UseVisualStyleBackColor = true;
 			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(6, 3);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(83, 13);
+			this->label5->TabIndex = 16;
+			this->label5->Text = L"Course Number:";
+			// 
+			// comboBox3
+			// 
+			this->comboBox3->FormattingEnabled = true;
+			this->comboBox3->Location = System::Drawing::Point(5, 60);
+			this->comboBox3->Name = L"comboBox3";
+			this->comboBox3->Size = System::Drawing::Size(200, 21);
+			this->comboBox3->TabIndex = 15;
+			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(6, 77);
+			this->label1->Location = System::Drawing::Point(6, 83);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(143, 13);
+			this->label1->Size = System::Drawing::Size(135, 13);
 			this->label1->TabIndex = 14;
-			this->label1->Text = L"Choose Instructor for course:";
+			this->label1->Text = L"Assign Instructor to course:";
 			// 
 			// comboBox1
 			// 
 			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(3, 93);
+			this->comboBox1->Location = System::Drawing::Point(5, 99);
 			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(199, 21);
+			this->comboBox1->Size = System::Drawing::Size(200, 21);
 			this->comboBox1->TabIndex = 13;
 			// 
 			// dataGridView2
 			// 
+			this->dataGridView2->AllowUserToAddRows = false;
+			this->dataGridView2->AllowUserToDeleteRows = false;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(1) {this->CourseNum});
 			this->dataGridView2->Location = System::Drawing::Point(3, 149);
 			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->ReadOnly = true;
 			this->dataGridView2->Size = System::Drawing::Size(200, 128);
 			this->dataGridView2->TabIndex = 12;
 			// 
@@ -417,20 +460,13 @@ namespace CS499GUI {
 			// 
 			this->CourseNum->HeaderText = L"Courses";
 			this->CourseNum->Name = L"CourseNum";
+			this->CourseNum->ReadOnly = true;
 			this->CourseNum->Width = 150;
-			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(3, 47);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(200, 20);
-			this->textBox6->TabIndex = 11;
-			this->textBox6->Text = L"Preference";
 			// 
 			// checkBox2
 			// 
 			this->checkBox2->AutoSize = true;
-			this->checkBox2->Location = System::Drawing::Point(5, 29);
+			this->checkBox2->Location = System::Drawing::Point(5, 41);
 			this->checkBox2->Name = L"checkBox2";
 			this->checkBox2->Size = System::Drawing::Size(106, 17);
 			this->checkBox2->TabIndex = 10;
@@ -449,14 +485,15 @@ namespace CS499GUI {
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(3, 6);
+			this->textBox3->Location = System::Drawing::Point(5, 18);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(200, 20);
 			this->textBox3->TabIndex = 9;
-			this->textBox3->Text = L"Course #";
 			// 
 			// tabPage4
 			// 
+			this->tabPage4->Controls->Add(this->label3);
+			this->tabPage4->Controls->Add(this->label2);
 			this->tabPage4->Controls->Add(this->dataGridView3);
 			this->tabPage4->Controls->Add(this->button4);
 			this->tabPage4->Controls->Add(this->textBox4);
@@ -469,26 +506,49 @@ namespace CS499GUI {
 			this->tabPage4->Text = L"Add Room";
 			this->tabPage4->UseVisualStyleBackColor = true;
 			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(5, 41);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(78, 13);
+			this->label3->TabIndex = 13;
+			this->label3->Text = L"Room Number:";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(6, 3);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(87, 13);
+			this->label2->TabIndex = 12;
+			this->label2->Text = L"Building Number:";
+			// 
 			// dataGridView3
 			// 
+			this->dataGridView3->AllowUserToAddRows = false;
+			this->dataGridView3->AllowUserToDeleteRows = false;
 			this->dataGridView3->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView3->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {this->Building, 
 				this->RoomNum});
-			this->dataGridView3->Location = System::Drawing::Point(2, 84);
+			this->dataGridView3->Location = System::Drawing::Point(2, 111);
 			this->dataGridView3->Name = L"dataGridView3";
-			this->dataGridView3->Size = System::Drawing::Size(200, 191);
+			this->dataGridView3->ReadOnly = true;
+			this->dataGridView3->Size = System::Drawing::Size(200, 164);
 			this->dataGridView3->TabIndex = 11;
 			// 
 			// Building
 			// 
 			this->Building->HeaderText = L"Building";
 			this->Building->Name = L"Building";
+			this->Building->ReadOnly = true;
 			this->Building->Width = 75;
 			// 
 			// RoomNum
 			// 
 			this->RoomNum->HeaderText = L"Room";
 			this->RoomNum->Name = L"RoomNum";
+			this->RoomNum->ReadOnly = true;
 			this->RoomNum->Width = 75;
 			// 
 			// saveFileDialog1
@@ -845,6 +905,11 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 			dept->AddInstructor(instrName, instrPref, prefbool);
 			this->dataGridView4->Rows->Add(this->textBox1->Text);
 			this->comboBox1->Items->Add(this->textBox1->Text);
+
+			//Reset fields
+			this->textBox1->Text = "";
+			this->checkBox1->Checked = false;
+			this->comboBox2->SelectedIndex = 0;
 		 }
 
 		 //Add course button
@@ -853,13 +918,19 @@ private: System::Void button5_Click(System::Object^  sender, System::EventArgs^ 
 			msclr::interop::marshal_context context;
 			string courseNum = context.marshal_as<std::string>(this->textBox3->Text);
 			string instrName = context.marshal_as<std::string>(this->comboBox1->Text);
-			if (this->checkBox1->Checked == true)
+			if (this->checkBox2->Checked == true)
 			{
 				prefbool = true;
 			}
 			dept->AddCourse(courseNum, "", prefbool);
 			dept->courses[dept->courses.size()-1]->profName = instrName;
 			this->dataGridView2->Rows->Add(this->textBox3->Text);
+
+			//Reset Fields
+			this->textBox3->Text = "";
+			this->checkBox2->Checked = false;
+			this->comboBox1->SelectedIndex = 0;
+			//this->comboBox3->SelectedIndex = 0;
 		 }
 };
 }

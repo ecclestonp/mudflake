@@ -1,4 +1,4 @@
-﻿Build started 4/13/2016 10:58:44 PM.
+﻿Build started 4/14/2016 6:00:05 PM.
      1>Project "C:\Users\Ryan\Documents\GitHub\mudflake\CS499GUI\CS499GUI\CS499GUI.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\CS499GUI.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -8,9 +8,9 @@
          All outputs are up-to-date.
          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt CS499GUI.cpp /clr:nostdlib 
          CS499GUI.cpp
-     1>c:\users\ryan\documents\github\mudflake\cs499gui\cs499gui\Form1.h(643): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ryan\documents\github\mudflake\cs499gui\cs499gui\Form1.h(649): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ryan\documents\github\mudflake\cs499gui\cs499gui\Form1.h(677): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ryan\documents\github\mudflake\cs499gui\cs499gui\Form1.h(703): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ryan\documents\github\mudflake\cs499gui\cs499gui\Form1.h(709): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ryan\documents\github\mudflake\cs499gui\cs499gui\Form1.h(737): warning C4018: '<' : signed/unsigned mismatch
          All outputs are up-to-date.
        CoreResGen:
          No resources are out of date with respect to their source files. Skipping resource generation.
@@ -37,4 +37,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.04
+Time Elapsed 00:00:01.94
