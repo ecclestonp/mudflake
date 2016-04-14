@@ -162,3 +162,21 @@ void LoadParse::readRoomFile(char *fName, Schedule *dept)
 	iFile.close();
 	return;
 }
+
+//Read time file name and set available times
+void LoadParse::readTimeFile(char *fName, Schedule *dept)
+{
+	ifstream iFile;
+	iFile.open(fName);
+
+	int i = 0;
+
+	while (!iFile.eof())
+	{
+		getline(iFile, dept->theTimes[i]);
+		i++;
+	}
+
+	iFile.close();
+	return;
+}

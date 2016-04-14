@@ -7,7 +7,10 @@
 #include "Course.h"
 #include "Instructor.h"
 #include "BuildObj.h"
+#include <string>
 #include <vector>
+
+using namespace std;
 
 //Define structure for dept
 class Schedule
@@ -20,6 +23,7 @@ public:
 	vector<Instructor *> instructors;
 	BuildObj addObject;
 	int scheduleArray[100][4];
+	string theTimes[10];
 
 	Schedule();
 	~Schedule();

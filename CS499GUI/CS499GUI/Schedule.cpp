@@ -225,17 +225,7 @@ void Schedule::makeSchedule()
 			}
 		}
 	}
-	/*
-	Time bit positions 1 hour 20 min increments (hard coded correspondence for now):
-	0x00000001 = 8 - 9:20
-	0x00000010 = 9:20-10:40
-	0x00000100 = 10:40-12
-	0x00001000 = 12-1:20
-	0x00010000 = 1:20-2:40
-	0x00100000 = 2:40-4
-	0x01000000 = 4-5:20
-	0x10000000 = 5:20-6:40
-	*/
+
 	unsigned int bitPos = 0x00000001;
 
 	//For all other unschedule things
