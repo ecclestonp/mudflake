@@ -15,4 +15,6 @@ class Instructor
 		string preference;			//NULL if no preference, contains std::string of preference if there is one
 		string profCourse[100];
 		int courseLinker[100];
+		unsigned int classTimeMW;		//mon/weds bit flag times
+		unsigned int classTimeTT;		//tues/thursday bit flag times
 };

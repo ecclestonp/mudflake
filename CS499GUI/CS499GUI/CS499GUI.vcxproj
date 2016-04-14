@@ -94,7 +94,6 @@
     <ClCompile Include="Course.cpp" />
     <ClCompile Include="CS499GUI.cpp" />
     <ClCompile Include="LoadParse.cpp" />
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="OutputFile.cpp" />
     <ClCompile Include="Schedule.cpp" />
     <ClCompile Include="stdafx.cpp">
