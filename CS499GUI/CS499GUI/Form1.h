@@ -720,7 +720,7 @@ private: System::Void toolStripMenuItem3_Click(System::Object^  sender, System::
 				LoadParse tmploader;
 
 				//Load times passively
-				tmploader.readTimeFile("Times.csv", dept);
+				tmploader.readTimeFile("Times.dat", dept);
 
 				//Prompt for file and load it
 				if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
@@ -867,7 +867,7 @@ private: System::Void toolStripButton4_Click(System::Object^  sender, System::Ev
 				}
 		 }
 
-//This section creates new schedules based on the dropdown selection for department
+//This section creates new schedules
 private: System::Void toolStripMenuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //Clear out anything existing in the dept currently
 			dept->ClearSchedule();
