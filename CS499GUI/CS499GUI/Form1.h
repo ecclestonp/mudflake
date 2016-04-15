@@ -46,6 +46,7 @@ namespace CS499GUI {
 			this->comboBox2->Items->Add("Evening classes only");
 			this->comboBox2->Items->Add("All Tues-Thurs classes");
 			this->comboBox2->Items->Add("All Mon-Weds classes");
+			this->comboBox2->SelectedIndex = 0;
 		}
 
 	protected:
@@ -357,6 +358,7 @@ namespace CS499GUI {
 			// 
 			// comboBox2
 			// 
+			this->comboBox2->Enabled = false;
 			this->comboBox2->FormattingEnabled = true;
 			this->comboBox2->Location = System::Drawing::Point(5, 60);
 			this->comboBox2->Name = L"comboBox2";
@@ -391,6 +393,7 @@ namespace CS499GUI {
 			this->checkBox1->TabIndex = 9;
 			this->checkBox1->Text = L"Has Preference\?";
 			this->checkBox1->UseVisualStyleBackColor = true;
+			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
 			// 
 			// tabPage3
 			// 
@@ -421,6 +424,7 @@ namespace CS499GUI {
 			// 
 			// comboBox3
 			// 
+			this->comboBox3->Enabled = false;
 			this->comboBox3->FormattingEnabled = true;
 			this->comboBox3->Location = System::Drawing::Point(5, 60);
 			this->comboBox3->Name = L"comboBox3";
@@ -472,6 +476,7 @@ namespace CS499GUI {
 			this->checkBox2->TabIndex = 10;
 			this->checkBox2->Text = L"Has Preference\?";
 			this->checkBox2->UseVisualStyleBackColor = true;
+			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox2_CheckedChanged);
 			// 
 			// button5
 			// 
@@ -674,202 +679,220 @@ namespace CS499GUI {
 #pragma endregion
 	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 			 }
+			 
+	//Load data csv
+	private: System::Void toolStripMenuItem2_Click(System::Object^  sender, System::EventArgs^  e) {
+			//Load and parse the data
+			LoadParse tmploader;
 
-			 //Add classroom button
-	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
-				msclr::interop::marshal_context context;
-				string bldg = context.marshal_as<std::string>(this->textBox4->Text);
-				string room = context.marshal_as<std::string>(this->textBox2->Text);
-				dept->AddClassroom(bldg, room, 0, 0);
-				this->dataGridView3->Rows->Add(this->textBox4->Text, this->textBox2->Text);
-		 }
+			//Prompt for file and load it
+			if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
+			{
+				//Clear tables and stuff
+				dataGridView2->Rows->Clear();
+				dataGridView2->Refresh();
+				dataGridView4->Rows->Clear();
+				dataGridView4->Refresh();
+				comboBox1->Items->Clear();
 
-			 //Load data csv
-private: System::Void toolStripMenuItem2_Click(System::Object^  sender, System::EventArgs^  e) {
-				//Load and parse the data
-				LoadParse tmploader;
+				System::String ^ tmpstr = openFileDialog1->FileName;
 
-				//Prompt for file and load it
-				if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
+				IntPtr ptrToNativeString = Marshal::StringToHGlobalAnsi(tmpstr);
+				char* fName = static_cast<char*>(ptrToNativeString.ToPointer());
+
+				tmploader.parseInput(fName, dept);
+
+				System::String ^ theCourse;
+				for (int i = 0; i < dept->courses.size(); i++)
 				{
-					System::String ^ tmpstr = openFileDialog1->FileName;
-
-					IntPtr ptrToNativeString = Marshal::StringToHGlobalAnsi(tmpstr);
-					char* fName = static_cast<char*>(ptrToNativeString.ToPointer());
-
-					tmploader.parseInput(fName, dept);
-
-					System::String ^ theCourse;
-					for (int i = 0; i < dept->courses.size(); i++)
-					{
-						theCourse = gcnew String(dept->courses[i]->courseNum.c_str());
-						this->dataGridView2->Rows->Add(theCourse);
-					}
-					System::String ^ theInstr;
-					for (int i = 1; i < dept->instructors.size(); i++)
-					{
-						theInstr = gcnew String(dept->instructors[i]->instructorName.c_str());
-						this->dataGridView4->Rows->Add(theInstr);
-						this->comboBox1->Items->Add(theInstr);
-					}
+					theCourse = gcnew String(dept->courses[i]->courseNum.c_str());
+					this->dataGridView2->Rows->Add(theCourse);
 				}
-		 }
-		 //Load room csv
-private: System::Void toolStripMenuItem3_Click(System::Object^  sender, System::EventArgs^  e) {
-				//Load and parse the data
-				LoadParse tmploader;
-
-				//Load times passively
-				tmploader.readTimeFile("Times.dat", dept);
-
-				//Prompt for file and load it
-				if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
+				System::String ^ theInstr;
+				for (int i = 1; i < dept->instructors.size(); i++)
 				{
-					System::String ^ tmpstr = openFileDialog1->FileName;
-
-					IntPtr ptrToNativeString = Marshal::StringToHGlobalAnsi(tmpstr);
-					char* fName = static_cast<char*>(ptrToNativeString.ToPointer());
-
-					tmploader.readRoomFile(fName, dept);
-
-					System::String ^ theBldg;
-					System::String ^ theRoom;
-					for (int i = 0; i < dept->classrooms.size(); i++)
-					{
-						theBldg = gcnew String(dept->classrooms[i]->bldgNum.c_str());
-						theRoom = gcnew String(dept->classrooms[i]->roomNum.c_str());
-						this->dataGridView3->Rows->Add(theBldg, theRoom);
-					}
-
-					this->toolStripButton3->Enabled = true;
-					this->toolStripDropDownButton2->Enabled = false;
+					theInstr = gcnew String(dept->instructors[i]->instructorName.c_str());
+					this->dataGridView4->Rows->Add(theInstr);
+					this->comboBox1->Items->Add(theInstr);
 				}
-		 }
-		 //Generate Schedule
-private: System::Void toolStripButton3_Click(System::Object^  sender, System::EventArgs^  e) {
-				 //Initiate schedule building
-				 dept->makeSchedule();
+			}
+			this->comboBox1->SelectedIndex = 0;
+		}
+
+	//Load room csv
+	private: System::Void toolStripMenuItem3_Click(System::Object^  sender, System::EventArgs^  e) {
+			//Load and parse the data
+			LoadParse tmploader;
+
+			//Load times passively
+			tmploader.readTimeFile("Times.dat", dept);
+
+			//Prompt for file and load it
+			if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
+			{
+				//Clear table
+				dataGridView3->Rows->Clear();
+				dataGridView3->Refresh();
+				
+				System::String ^ tmpstr = openFileDialog1->FileName;
+
+				IntPtr ptrToNativeString = Marshal::StringToHGlobalAnsi(tmpstr);
+				char* fName = static_cast<char*>(ptrToNativeString.ToPointer());
+
+				tmploader.readRoomFile(fName, dept);
+
+				System::String ^ theBldg;
+				System::String ^ theRoom;
+				for (int i = 0; i < dept->classrooms.size(); i++)
+				{
+					theBldg = gcnew String(dept->classrooms[i]->bldgNum.c_str());
+					theRoom = gcnew String(dept->classrooms[i]->roomNum.c_str());
+					this->dataGridView3->Rows->Add(theBldg, theRoom);
+				}
+
+				this->toolStripButton3->Enabled = true;
+				this->toolStripDropDownButton2->Enabled = false;
+			}
+		}
+
+	//Generate Schedule
+	private: System::Void toolStripButton3_Click(System::Object^  sender, System::EventArgs^  e) {
+			//Initiate schedule building
+			dept->makeSchedule();
+
+			//Clear tables and stuff
+			dataGridView1->Rows->Clear();
+			dataGridView1->Refresh();
+			dataGridView2->Rows->Clear();
+			dataGridView2->Refresh();
+			dataGridView3->Rows->Clear();
+			dataGridView3->Refresh();
+			dataGridView4->Rows->Clear();
+			dataGridView4->Refresh();
+			comboBox1->Items->Clear();
 				 
-				 //Print the data into the table on screen
-				 for (int i = 0; dept->scheduleArray[i][0] != 999; i++)
-					{
-						System::String ^ theDay;
-						System::String ^ theTime;
-						System::String ^ theCourse = gcnew String(dept->courses[dept->scheduleArray[i][1]]->courseNum.c_str());
-						System::String ^ theBldg = gcnew String(dept->classrooms[dept->scheduleArray[i][0]]->bldgNum.c_str());
-						System::String ^ theRoom = gcnew String(dept->classrooms[dept->scheduleArray[i][0]]->roomNum.c_str());
-						System::String ^ theInstr = gcnew String(dept->courses[dept->scheduleArray[i][1]]->profName.c_str());
+			//Print the data into the table on screen
+			for (int i = 0; dept->scheduleArray[i][0] != 999; i++)
+			{
+				System::String ^ theDay;
+				System::String ^ theTime;
+				System::String ^ theCourse = gcnew String(dept->courses[dept->scheduleArray[i][1]]->courseNum.c_str());
+				System::String ^ theBldg = gcnew String(dept->classrooms[dept->scheduleArray[i][0]]->bldgNum.c_str());
+				System::String ^ theRoom = gcnew String(dept->classrooms[dept->scheduleArray[i][0]]->roomNum.c_str());
+				System::String ^ theInstr = gcnew String(dept->courses[dept->scheduleArray[i][1]]->profName.c_str());
 
-						//check to see which time it is assigned and print it
-						//mon/weds
-						if (dept->scheduleArray[i][2] == 0x00000001 && dept->scheduleArray[i][3] == 1)
-						{
-							theDay = "MW";
-							theTime = gcnew String(dept->theTimes[0].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x00000010  && dept->scheduleArray[i][3] == 1)
-						{
-							theDay = "MW";
-							theTime = gcnew String(dept->theTimes[1].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x00000100  && dept->scheduleArray[i][3] == 1)
-						{
-							theDay = "MW";
-							theTime = gcnew String(dept->theTimes[2].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x00001000  && dept->scheduleArray[i][3] == 1)
-						{
-							theDay = "MW";
-							theTime = gcnew String(dept->theTimes[3].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x00010000  && dept->scheduleArray[i][3] == 1)
-						{
-							theDay = "MW";
-							theTime = gcnew String(dept->theTimes[4].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x00100000  && dept->scheduleArray[i][3] == 1)
-						{
-							theDay = "MW";
-							theTime = gcnew String(dept->theTimes[5].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x01000000  && dept->scheduleArray[i][3] == 1)
-						{
-							theDay = "MW";
-							theTime = gcnew String(dept->theTimes[6].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x10000000  && dept->scheduleArray[i][3] == 1)
-						{
-							theDay = "MW";
-							theTime = gcnew String(dept->theTimes[7].c_str());
-						}
-
-						//tues/thurs
-						if (dept->scheduleArray[i][2] == 0x00000001 && dept->scheduleArray[i][3] == 2)
-						{
-							theDay = "TT";
-							theTime = gcnew String(dept->theTimes[0].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x00000010  && dept->scheduleArray[i][3] == 2)
-						{
-							theDay = "TT";
-							theTime = gcnew String(dept->theTimes[1].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x00000100  && dept->scheduleArray[i][3] == 2)
-						{
-							theDay = "TT";
-							theTime = gcnew String(dept->theTimes[2].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x00001000  && dept->scheduleArray[i][3] == 2)
-						{
-							theDay = "TT";
-							theTime = gcnew String(dept->theTimes[3].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x00010000  && dept->scheduleArray[i][3] == 2)
-						{
-							theDay = "TT";
-							theTime = gcnew String(dept->theTimes[4].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x00100000  && dept->scheduleArray[i][3] == 2)
-						{
-							theDay = "TT";
-							theTime = gcnew String(dept->theTimes[5].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x01000000  && dept->scheduleArray[i][3] == 2)
-						{
-							theDay = "TT";
-							theTime = gcnew String(dept->theTimes[6].c_str());
-						}
-						else if (dept->scheduleArray[i][2] == 0x10000000  && dept->scheduleArray[i][3] == 2)
-						{
-							theDay = "TT";
-							theTime = gcnew String(dept->theTimes[7].c_str());
-						}
-						//Add the row to the GUI table
-						this->dataGridView1->Rows->Add(theCourse, theInstr, theBldg, theRoom, theDay, theTime);
-					}
-				 //Enable the save button now
-				 this->toolStripButton4->Enabled = true;
-				 this->toolStripButton3->Enabled = false;
-		 }
-		 //Save Schedule
-private: System::Void toolStripButton4_Click(System::Object^  sender, System::EventArgs^  e) {
-				OutputFile tmpW;
-				//Prompt for file name and location and print to file
-				if (saveFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
+				//check to see which time it is assigned and print it
+				//mon/weds
+				if (dept->scheduleArray[i][2] == 0x00000001 && dept->scheduleArray[i][3] == 1)
 				{
-					System::String ^ tmpstr = saveFileDialog1->FileName;
-
-					IntPtr ptrToNativeString = Marshal::StringToHGlobalAnsi(tmpstr);
-					char* fName = static_cast<char*>(ptrToNativeString.ToPointer());
-
-					//Create writefile instance and write the file
-					tmpW.writeToFile(this->dataGridView1, fName);
+					theDay = "MW";
+					theTime = gcnew String(dept->theTimes[0].c_str());
 				}
-		 }
+				else if (dept->scheduleArray[i][2] == 0x00000010  && dept->scheduleArray[i][3] == 1)
+				{
+					theDay = "MW";
+					theTime = gcnew String(dept->theTimes[1].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x00000100  && dept->scheduleArray[i][3] == 1)
+				{
+					theDay = "MW";
+					theTime = gcnew String(dept->theTimes[2].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x00001000  && dept->scheduleArray[i][3] == 1)
+				{
+					theDay = "MW";
+					theTime = gcnew String(dept->theTimes[3].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x00010000  && dept->scheduleArray[i][3] == 1)
+				{
+					theDay = "MW";
+					theTime = gcnew String(dept->theTimes[4].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x00100000  && dept->scheduleArray[i][3] == 1)
+				{
+					theDay = "MW";
+					theTime = gcnew String(dept->theTimes[5].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x01000000  && dept->scheduleArray[i][3] == 1)
+				{
+					theDay = "MW";
+					theTime = gcnew String(dept->theTimes[6].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x10000000  && dept->scheduleArray[i][3] == 1)
+				{
+					theDay = "MW";
+					theTime = gcnew String(dept->theTimes[7].c_str());
+				}
 
-//This section creates new schedules
-private: System::Void toolStripMenuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
-			 //Clear out anything existing in the dept currently
+				//tues/thurs
+				if (dept->scheduleArray[i][2] == 0x00000001 && dept->scheduleArray[i][3] == 2)
+				{
+					theDay = "TT";
+					theTime = gcnew String(dept->theTimes[0].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x00000010  && dept->scheduleArray[i][3] == 2)
+				{
+					theDay = "TT";
+					theTime = gcnew String(dept->theTimes[1].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x00000100  && dept->scheduleArray[i][3] == 2)
+				{
+					theDay = "TT";
+					theTime = gcnew String(dept->theTimes[2].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x00001000  && dept->scheduleArray[i][3] == 2)
+				{
+					theDay = "TT";
+					theTime = gcnew String(dept->theTimes[3].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x00010000  && dept->scheduleArray[i][3] == 2)
+				{
+					theDay = "TT";
+					theTime = gcnew String(dept->theTimes[4].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x00100000  && dept->scheduleArray[i][3] == 2)
+				{
+					theDay = "TT";
+					theTime = gcnew String(dept->theTimes[5].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x01000000  && dept->scheduleArray[i][3] == 2)
+				{
+					theDay = "TT";
+					theTime = gcnew String(dept->theTimes[6].c_str());
+				}
+				else if (dept->scheduleArray[i][2] == 0x10000000  && dept->scheduleArray[i][3] == 2)
+				{
+					theDay = "TT";
+					theTime = gcnew String(dept->theTimes[7].c_str());
+				}
+				//Add the row to the GUI table
+				this->dataGridView1->Rows->Add(theCourse, theInstr, theBldg, theRoom, theDay, theTime);
+			}
+
+			//Enable the save button now
+			this->toolStripButton4->Enabled = true;
+			this->toolStripButton3->Enabled = false;
+			this->tabControl2->Enabled = false;
+		}
+		 //Save Schedule
+	private: System::Void toolStripButton4_Click(System::Object^  sender, System::EventArgs^  e) {
+			OutputFile tmpW;
+			//Prompt for file name and location and print to file
+			if (saveFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
+			{
+				System::String ^ tmpstr = saveFileDialog1->FileName;
+
+				IntPtr ptrToNativeString = Marshal::StringToHGlobalAnsi(tmpstr);
+				char* fName = static_cast<char*>(ptrToNativeString.ToPointer());
+
+				//Create writefile instance and write the file
+				tmpW.writeToFile(this->dataGridView1, fName);
+			}
+		}
+
+	//This section creates new schedules on new schedule button click
+	private: System::Void toolStripMenuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
+			//Clear out anything existing in the dept currently
 			dept->ClearSchedule();
 
 			//Clear tables and stuff
@@ -892,8 +915,8 @@ private: System::Void toolStripMenuItem1_Click(System::Object^  sender, System::
 			this->tabPage1->Text = this->toolStripMenuItem1->Text;
 		 }
 
-		 //Add instructor button
-private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+	//Add instructor button
+	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 			bool prefbool = false;
 			msclr::interop::marshal_context context;
 			string instrName = context.marshal_as<std::string>(this->textBox1->Text);
@@ -912,8 +935,8 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 			this->comboBox2->SelectedIndex = 0;
 		 }
 
-		 //Add course button
-private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
+	//Add course button
+	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
 			bool prefbool = false;
 			msclr::interop::marshal_context context;
 			string courseNum = context.marshal_as<std::string>(this->textBox3->Text);
@@ -922,15 +945,60 @@ private: System::Void button5_Click(System::Object^  sender, System::EventArgs^ 
 			{
 				prefbool = true;
 			}
-			dept->AddCourse(courseNum, "", prefbool);
-			dept->courses[dept->courses.size()-1]->profName = instrName;
-			this->dataGridView2->Rows->Add(this->textBox3->Text);
 
-			//Reset Fields
-			this->textBox3->Text = "";
-			this->checkBox2->Checked = false;
-			this->comboBox1->SelectedIndex = 0;
-			//this->comboBox3->SelectedIndex = 0;
-		 }
+			if (comboBox1->Items->Count == 0)
+			{
+				MessageBox::Show("You haven't added any instructors!  You must assign an instructor to this course.");
+			}
+			else
+			{
+				dept->AddCourse(courseNum, "", prefbool);
+				dept->courses[dept->courses.size()-1]->profName = instrName;
+				this->dataGridView2->Rows->Add(this->textBox3->Text);
+
+				//Reset Fields
+				this->textBox3->Text = "";
+				this->checkBox2->Checked = false;
+				this->comboBox1->SelectedIndex = 0;
+				//this->comboBox3->SelectedIndex = 0;
+			}
+		}
+
+	//Add classroom button
+	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+			msclr::interop::marshal_context context;
+			string bldg = context.marshal_as<std::string>(this->textBox4->Text);
+			string room = context.marshal_as<std::string>(this->textBox2->Text);
+			dept->AddClassroom(bldg, room, 0, 0);
+			this->dataGridView3->Rows->Add(this->textBox4->Text, this->textBox2->Text);
+
+			//Reset fields
+			this->textBox4->Text = "";
+			this->textBox2->Text = "";
+		}
+
+	//enables/disables dropdown for instructor preference based on if checkbox is checked or not
+	private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+			if (this->checkBox1->Checked == true)
+			{
+				this->comboBox2->Enabled = true;
+			}
+			else
+			{
+				this->comboBox2->Enabled = false;
+			}
+		}
+
+	//enables/disables dropdown for course preference based on if checkbox is checked or not
+	private: System::Void checkBox2_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+			if (this->checkBox2->Checked == true)
+			{
+				this->comboBox3->Enabled = true;
+			}
+			else
+			{
+				this->comboBox3->Enabled = false;
+			}
+		}
 };
 }
