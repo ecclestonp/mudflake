@@ -62,6 +62,8 @@ void LoadParse::parseInput(char *fName, Schedule *dept)
 
 	input.open(fName);
 	string strn;
+	getline(input, strn);
+	dept->deptName = strn;
 	while(!input.eof())
 	{
 		getline(input, strn);
@@ -94,6 +96,9 @@ void LoadParse::parseInput(char *fName, Schedule *dept)
 				vector<string> temp;
 				string tempPreference;
 				string instrPreference;
+
+				if (strn == "Faculty Assignments:")
+					continue;
 
 				splitString(strn, ',', temp);//added passing the Schedule object, allows pushing of instructor object
 				tempPreference = temp.at(temp.size() - 1).substr(temp.at(temp.size() - 1).find_first_of("-") + 2); 

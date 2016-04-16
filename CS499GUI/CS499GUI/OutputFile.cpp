@@ -11,14 +11,14 @@
 using namespace System;
 using namespace std;
 
-void OutputFile::writeToFile(System::Windows::Forms::DataGridView ^ dgv, char *fName)
+void OutputFile::writeToFile(System::Windows::Forms::DataGridView ^ dgv, char *fName, string deptName)
 {
 	//Open file for output
 	ofstream outFile;
 	outFile.open(fName);
 
 	//Write first lines into .csv file
-	//outFile << dept->deptName << endl;
+	outFile << deptName << endl;
 	outFile << "Course,Instructor,Building,Room,Day,Time" << endl;
 
 	//Write the data array to the file in .csv format

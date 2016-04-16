@@ -9,5 +9,5 @@ using namespace std;
 class OutputFile
 {
 	public:
-		void writeToFile(System::Windows::Forms::DataGridView ^ dgv, char *fName);
+		void writeToFile(System::Windows::Forms::DataGridView ^ dgv, char *fName, string deptName);
 };

@@ -45,7 +45,7 @@ namespace CS499GUI {
 			this->comboBox2->Items->Add("Afternoon classes only");
 			this->comboBox2->Items->Add("Evening classes only");
 			this->comboBox2->Items->Add("All Tues-Thurs classes");
-			this->comboBox2->Items->Add("All Mon-Weds classes");
+			this->comboBox2->Items->Add("All Mon-Wed classes");
 			this->comboBox2->SelectedIndex = 0;
 		}
 
@@ -81,12 +81,12 @@ namespace CS499GUI {
 
 	private: System::Windows::Forms::CheckBox^  checkBox2;
 	private: System::Windows::Forms::DataGridView^  dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Course;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Instructor;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Bldg;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Room;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Day;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Time;
+
+
+
+
+
+
 	private: System::Windows::Forms::DataGridView^  dataGridView2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  CourseNum;
 	private: System::Windows::Forms::DataGridView^  dataGridView4;
@@ -112,6 +112,12 @@ namespace CS499GUI {
 	private: System::Windows::Forms::Label^  label4;
 	private: System::Windows::Forms::Label^  label5;
 	private: System::Windows::Forms::ComboBox^  comboBox3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Course;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Instructor;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Bldg;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Room;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Day;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Time;
 
 	private:
 		/// <summary>
@@ -136,12 +142,6 @@ namespace CS499GUI {
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Course = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Instructor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Bldg = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Room = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Day = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Time = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabControl2 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
@@ -175,6 +175,12 @@ namespace CS499GUI {
 			this->toolStripMenuItem3 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripButton3 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripButton4 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->Course = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Instructor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Bldg = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Room = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Day = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Time = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->BeginInit();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->BeginInit();
@@ -203,14 +209,14 @@ namespace CS499GUI {
 			this->textBox1->Location = System::Drawing::Point(5, 18);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(200, 20);
-			this->textBox1->TabIndex = 7;
+			this->textBox1->TabIndex = 0;
 			// 
 			// button3
 			// 
 			this->button3->Location = System::Drawing::Point(103, 91);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(100, 20);
-			this->button3->TabIndex = 4;
+			this->button3->TabIndex = 3;
 			this->button3->Text = L"Add Instructor";
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
@@ -225,7 +231,7 @@ namespace CS499GUI {
 			this->button4->Location = System::Drawing::Point(103, 85);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(100, 20);
-			this->button4->TabIndex = 5;
+			this->button4->TabIndex = 11;
 			this->button4->Text = L"Add Classroom";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
@@ -235,14 +241,14 @@ namespace CS499GUI {
 			this->textBox2->Location = System::Drawing::Point(5, 60);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(200, 20);
-			this->textBox2->TabIndex = 8;
+			this->textBox2->TabIndex = 10;
 			// 
 			// textBox4
 			// 
 			this->textBox4->Location = System::Drawing::Point(5, 20);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(200, 20);
-			this->textBox4->TabIndex = 10;
+			this->textBox4->TabIndex = 9;
 			// 
 			// tabPage1
 			// 
@@ -267,47 +273,7 @@ namespace CS499GUI {
 			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->Size = System::Drawing::Size(562, 354);
 			this->dataGridView1->TabIndex = 0;
-			// 
-			// Course
-			// 
-			this->Course->HeaderText = L"Course";
-			this->Course->Name = L"Course";
-			this->Course->ReadOnly = true;
-			this->Course->Width = 125;
-			// 
-			// Instructor
-			// 
-			this->Instructor->HeaderText = L"Instructor";
-			this->Instructor->Name = L"Instructor";
-			this->Instructor->ReadOnly = true;
-			this->Instructor->Width = 125;
-			// 
-			// Bldg
-			// 
-			this->Bldg->HeaderText = L"Bldg";
-			this->Bldg->Name = L"Bldg";
-			this->Bldg->ReadOnly = true;
-			this->Bldg->Width = 50;
-			// 
-			// Room
-			// 
-			this->Room->HeaderText = L"Room";
-			this->Room->Name = L"Room";
-			this->Room->ReadOnly = true;
-			this->Room->Width = 50;
-			// 
-			// Day
-			// 
-			this->Day->HeaderText = L"Day";
-			this->Day->Name = L"Day";
-			this->Day->ReadOnly = true;
-			this->Day->Width = 50;
-			// 
-			// Time
-			// 
-			this->Time->HeaderText = L"Time";
-			this->Time->Name = L"Time";
-			this->Time->ReadOnly = true;
+			this->dataGridView1->TabStop = false;
 			// 
 			// tabControl1
 			// 
@@ -316,7 +282,7 @@ namespace CS499GUI {
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
 			this->tabControl1->Size = System::Drawing::Size(570, 383);
-			this->tabControl1->TabIndex = 13;
+			this->tabControl1->TabIndex = 0;
 			this->tabControl1->TabStop = false;
 			// 
 			// tabControl2
@@ -329,7 +295,8 @@ namespace CS499GUI {
 			this->tabControl2->Name = L"tabControl2";
 			this->tabControl2->SelectedIndex = 0;
 			this->tabControl2->Size = System::Drawing::Size(217, 307);
-			this->tabControl2->TabIndex = 14;
+			this->tabControl2->TabIndex = 0;
+			this->tabControl2->TabStop = false;
 			// 
 			// tabPage2
 			// 
@@ -363,7 +330,7 @@ namespace CS499GUI {
 			this->comboBox2->Location = System::Drawing::Point(5, 60);
 			this->comboBox2->Name = L"comboBox2";
 			this->comboBox2->Size = System::Drawing::Size(200, 21);
-			this->comboBox2->TabIndex = 12;
+			this->comboBox2->TabIndex = 2;
 			// 
 			// dataGridView4
 			// 
@@ -376,6 +343,7 @@ namespace CS499GUI {
 			this->dataGridView4->ReadOnly = true;
 			this->dataGridView4->Size = System::Drawing::Size(200, 160);
 			this->dataGridView4->TabIndex = 11;
+			this->dataGridView4->TabStop = false;
 			// 
 			// InstructorName
 			// 
@@ -390,7 +358,7 @@ namespace CS499GUI {
 			this->checkBox1->Location = System::Drawing::Point(5, 41);
 			this->checkBox1->Name = L"checkBox1";
 			this->checkBox1->Size = System::Drawing::Size(106, 17);
-			this->checkBox1->TabIndex = 9;
+			this->checkBox1->TabIndex = 1;
 			this->checkBox1->Text = L"Has Preference\?";
 			this->checkBox1->UseVisualStyleBackColor = true;
 			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox1_CheckedChanged);
@@ -429,7 +397,7 @@ namespace CS499GUI {
 			this->comboBox3->Location = System::Drawing::Point(5, 60);
 			this->comboBox3->Name = L"comboBox3";
 			this->comboBox3->Size = System::Drawing::Size(200, 21);
-			this->comboBox3->TabIndex = 15;
+			this->comboBox3->TabIndex = 6;
 			// 
 			// label1
 			// 
@@ -446,7 +414,7 @@ namespace CS499GUI {
 			this->comboBox1->Location = System::Drawing::Point(5, 99);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(200, 21);
-			this->comboBox1->TabIndex = 13;
+			this->comboBox1->TabIndex = 7;
 			// 
 			// dataGridView2
 			// 
@@ -459,6 +427,7 @@ namespace CS499GUI {
 			this->dataGridView2->ReadOnly = true;
 			this->dataGridView2->Size = System::Drawing::Size(200, 128);
 			this->dataGridView2->TabIndex = 12;
+			this->dataGridView2->TabStop = false;
 			// 
 			// CourseNum
 			// 
@@ -473,7 +442,7 @@ namespace CS499GUI {
 			this->checkBox2->Location = System::Drawing::Point(5, 41);
 			this->checkBox2->Name = L"checkBox2";
 			this->checkBox2->Size = System::Drawing::Size(106, 17);
-			this->checkBox2->TabIndex = 10;
+			this->checkBox2->TabIndex = 5;
 			this->checkBox2->Text = L"Has Preference\?";
 			this->checkBox2->UseVisualStyleBackColor = true;
 			this->checkBox2->CheckedChanged += gcnew System::EventHandler(this, &Form1::checkBox2_CheckedChanged);
@@ -483,7 +452,7 @@ namespace CS499GUI {
 			this->button5->Location = System::Drawing::Point(103, 126);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(100, 20);
-			this->button5->TabIndex = 6;
+			this->button5->TabIndex = 8;
 			this->button5->Text = L"Add Course";
 			this->button5->UseVisualStyleBackColor = true;
 			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
@@ -493,7 +462,7 @@ namespace CS499GUI {
 			this->textBox3->Location = System::Drawing::Point(5, 18);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(200, 20);
-			this->textBox3->TabIndex = 9;
+			this->textBox3->TabIndex = 4;
 			// 
 			// tabPage4
 			// 
@@ -541,6 +510,7 @@ namespace CS499GUI {
 			this->dataGridView3->ReadOnly = true;
 			this->dataGridView3->Size = System::Drawing::Size(200, 164);
 			this->dataGridView3->TabIndex = 11;
+			this->dataGridView3->TabStop = false;
 			// 
 			// Building
 			// 
@@ -642,6 +612,44 @@ namespace CS499GUI {
 			this->toolStripButton4->ToolTipText = L"Save Schedule";
 			this->toolStripButton4->Click += gcnew System::EventHandler(this, &Form1::toolStripButton4_Click);
 			// 
+			// Course
+			// 
+			this->Course->HeaderText = L"Course";
+			this->Course->Name = L"Course";
+			this->Course->ReadOnly = true;
+			// 
+			// Instructor
+			// 
+			this->Instructor->HeaderText = L"Instructor";
+			this->Instructor->Name = L"Instructor";
+			this->Instructor->ReadOnly = true;
+			// 
+			// Bldg
+			// 
+			this->Bldg->HeaderText = L"Bldg";
+			this->Bldg->Name = L"Bldg";
+			this->Bldg->ReadOnly = true;
+			// 
+			// Room
+			// 
+			this->Room->HeaderText = L"Room";
+			this->Room->Name = L"Room";
+			this->Room->ReadOnly = true;
+			this->Room->Width = 50;
+			// 
+			// Day
+			// 
+			this->Day->HeaderText = L"Day";
+			this->Day->Name = L"Day";
+			this->Day->ReadOnly = true;
+			this->Day->Width = 50;
+			// 
+			// Time
+			// 
+			this->Time->HeaderText = L"Time";
+			this->Time->Name = L"Time";
+			this->Time->ReadOnly = true;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -709,7 +717,7 @@ namespace CS499GUI {
 					this->dataGridView2->Rows->Add(theCourse);
 				}
 				System::String ^ theInstr;
-				for (int i = 1; i < dept->instructors.size(); i++)
+				for (int i = 0; i < dept->instructors.size(); i++)
 				{
 					theInstr = gcnew String(dept->instructors[i]->instructorName.c_str());
 					this->dataGridView4->Rows->Add(theInstr);
@@ -717,6 +725,7 @@ namespace CS499GUI {
 				}
 			}
 			this->comboBox1->SelectedIndex = 0;
+			this->tabPage1->Text = gcnew String(dept->deptName.c_str());
 		}
 
 	//Load room csv
@@ -748,10 +757,16 @@ namespace CS499GUI {
 					theBldg = gcnew String(dept->classrooms[i]->bldgNum.c_str());
 					theRoom = gcnew String(dept->classrooms[i]->roomNum.c_str());
 					this->dataGridView3->Rows->Add(theBldg, theRoom);
+					this->comboBox3->Items->Add("Taught in " + theBldg + ", room " + theRoom);
+				}
+				for (int i = 0; i < 8; i++)
+				{
+					this->comboBox3->Items->Add("Must be in the " + gcnew String(dept->theTimes[i].c_str()) + " time slot.");
 				}
 
 				this->toolStripButton3->Enabled = true;
 				this->toolStripDropDownButton2->Enabled = false;
+				this->comboBox3->SelectedIndex = 0;
 			}
 		}
 
@@ -770,6 +785,9 @@ namespace CS499GUI {
 			dataGridView4->Rows->Clear();
 			dataGridView4->Refresh();
 			comboBox1->Items->Clear();
+			comboBox1->Refresh();
+			comboBox3->Items->Clear();
+			comboBox3->Refresh();
 				 
 			//Print the data into the table on screen
 			for (int i = 0; dept->scheduleArray[i][0] != 999; i++)
@@ -786,84 +804,84 @@ namespace CS499GUI {
 				if (dept->scheduleArray[i][2] == 0x00000001 && dept->scheduleArray[i][3] == 1)
 				{
 					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[0].c_str());
+					theTime = gcnew String(dept->theTimes[0].c_str()) + " AM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x00000010  && dept->scheduleArray[i][3] == 1)
 				{
 					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[1].c_str());
+					theTime = gcnew String(dept->theTimes[1].c_str()) + " AM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x00000100  && dept->scheduleArray[i][3] == 1)
 				{
 					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[2].c_str());
+					theTime = gcnew String(dept->theTimes[2].c_str()) + " AM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x00001000  && dept->scheduleArray[i][3] == 1)
 				{
 					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[3].c_str());
+					theTime = gcnew String(dept->theTimes[3].c_str()) + " PM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x00010000  && dept->scheduleArray[i][3] == 1)
 				{
 					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[4].c_str());
+					theTime = gcnew String(dept->theTimes[4].c_str()) + " PM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x00100000  && dept->scheduleArray[i][3] == 1)
 				{
 					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[5].c_str());
+					theTime = gcnew String(dept->theTimes[5].c_str()) + " PM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x01000000  && dept->scheduleArray[i][3] == 1)
 				{
 					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[6].c_str());
+					theTime = gcnew String(dept->theTimes[6].c_str()) + " PM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x10000000  && dept->scheduleArray[i][3] == 1)
 				{
 					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[7].c_str());
+					theTime = gcnew String(dept->theTimes[7].c_str()) + " PM";
 				}
 
 				//tues/thurs
 				if (dept->scheduleArray[i][2] == 0x00000001 && dept->scheduleArray[i][3] == 2)
 				{
 					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[0].c_str());
+					theTime = gcnew String(dept->theTimes[0].c_str()) + " AM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x00000010  && dept->scheduleArray[i][3] == 2)
 				{
 					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[1].c_str());
+					theTime = gcnew String(dept->theTimes[1].c_str()) + " AM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x00000100  && dept->scheduleArray[i][3] == 2)
 				{
 					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[2].c_str());
+					theTime = gcnew String(dept->theTimes[2].c_str()) + " AM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x00001000  && dept->scheduleArray[i][3] == 2)
 				{
 					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[3].c_str());
+					theTime = gcnew String(dept->theTimes[3].c_str()) + " PM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x00010000  && dept->scheduleArray[i][3] == 2)
 				{
 					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[4].c_str());
+					theTime = gcnew String(dept->theTimes[4].c_str()) + " PM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x00100000  && dept->scheduleArray[i][3] == 2)
 				{
 					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[5].c_str());
+					theTime = gcnew String(dept->theTimes[5].c_str()) + " PM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x01000000  && dept->scheduleArray[i][3] == 2)
 				{
 					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[6].c_str());
+					theTime = gcnew String(dept->theTimes[6].c_str()) + " PM";
 				}
 				else if (dept->scheduleArray[i][2] == 0x10000000  && dept->scheduleArray[i][3] == 2)
 				{
 					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[7].c_str());
+					theTime = gcnew String(dept->theTimes[7].c_str()) + " PM";
 				}
 				//Add the row to the GUI table
 				this->dataGridView1->Rows->Add(theCourse, theInstr, theBldg, theRoom, theDay, theTime);
@@ -874,7 +892,8 @@ namespace CS499GUI {
 			this->toolStripButton3->Enabled = false;
 			this->tabControl2->Enabled = false;
 		}
-		 //Save Schedule
+
+	//Save Schedule to .csv file
 	private: System::Void toolStripButton4_Click(System::Object^  sender, System::EventArgs^  e) {
 			OutputFile tmpW;
 			//Prompt for file name and location and print to file
@@ -886,7 +905,7 @@ namespace CS499GUI {
 				char* fName = static_cast<char*>(ptrToNativeString.ToPointer());
 
 				//Create writefile instance and write the file
-				tmpW.writeToFile(this->dataGridView1, fName);
+				tmpW.writeToFile(this->dataGridView1, fName, dept->deptName);
 			}
 		}
 
@@ -905,14 +924,13 @@ namespace CS499GUI {
 			dataGridView4->Rows->Clear();
 			dataGridView4->Refresh();
 			comboBox1->Items->Clear();
+			comboBox3->Items->Clear();
 
 			//enable stuff
 			this->toolStripDropDownButton2->Enabled = true;
 			this->tabControl2->Enabled = true;
 			this->toolStripButton3->Enabled = false;
-
-			dept->deptName =  "Computer Science";
-			this->tabPage1->Text = this->toolStripMenuItem1->Text;
+			this->tabPage1->Text = "Schedule";
 		 }
 
 	//Add instructor button
@@ -971,6 +989,8 @@ namespace CS499GUI {
 			string room = context.marshal_as<std::string>(this->textBox2->Text);
 			dept->AddClassroom(bldg, room, 0, 0);
 			this->dataGridView3->Rows->Add(this->textBox4->Text, this->textBox2->Text);
+			this->comboBox3->Items->Add("Taught in " + this->textBox4->Text + ", room " + this->textBox2->Text);
+			this->comboBox3->SelectedIndex = 0;
 
 			//Reset fields
 			this->textBox4->Text = "";

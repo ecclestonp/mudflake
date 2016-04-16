@@ -98,7 +98,7 @@ void Schedule::makeSchedule()
 	}
 	
 	//Handle instructors with a preference
-	for (int i = 1; i < this->instructors.size(); i++)
+	for (int i = 0; i < this->instructors.size(); i++)
 	{
 		Instructor *instr = instructors[i];
 		if (instr->hasPreference)/*Morning classes only*/
@@ -163,7 +163,7 @@ void Schedule::makeSchedule()
 							//No time slot so shift bitPos left 4 bits
 							bitPos <<= 4;
 							numShifted++;
-							if(numShifted > 3 && mwonly && ttonly)
+							if(numShifted > 2 && mwonly && ttonly)
 								bitPos = 0;
 						}
 					}
@@ -173,7 +173,7 @@ void Schedule::makeSchedule()
 	}
 
 	//Handle courses with a preference
-	for (int k = 1; k < this->instructors.size(); k++)
+	for (int k = 0; k < this->instructors.size(); k++)
 	{
 		Instructor *instr = instructors[k];
 		for (int i = 0; i < this->courses.size(); i++)
@@ -194,9 +194,13 @@ void Schedule::makeSchedule()
 				//check for a classroom/time opening and assign it
 				for (int j = 0; j < this->classrooms.size(); j++)
 				{
-					if (classrooms[j]->roomNum.compare(c->preference.substr(5,3)))
+					//This causes an error sometimes, not always same text.  Needed to use .find instead
+					//if (classrooms[j]->roomNum.compare(c->preference.substr(5,3)))
+					//	continue;
+
+					if (c->preference.find(classrooms[j]->roomNum) == std::string::npos)
 						continue;
-				
+
 					bitPos = 0x00000001;
 					//Mon/Weds time checks
 					while (bitPos != 0x00000000)
@@ -229,7 +233,7 @@ void Schedule::makeSchedule()
 	unsigned int bitPos = 0x00000001;
 
 	//For all other unschedule things
-	for (int k = 1; k < this->instructors.size(); k++)
+	for (int k = 0; k < this->instructors.size(); k++)
 	{
 		Instructor *instr = instructors[k];
 		for (int i = 0; i < this->courses.size(); i++)
