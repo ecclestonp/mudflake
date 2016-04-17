@@ -3,35 +3,37 @@ Location: Technology Hall
 
 Courses Offered
 
-	CS 107, CS 108, CS 114, CS 144, CS 172
-	CS 189, CS 190, CS 198, CS 211, CS 215
-	CS 226, CS 238, CS 247, CS 273, CS 283
-	CS 288, CS 302, CS 314, CS 317, CS 320
-	CS 322, CS 334, CS 338, CS 342, CS 349
-	CS 355, CS 363, CS 376, CS 378, CS 389
-	CS 397, CS 404, CS 431, CS 480, CS 483
-	CS 488, CS 489, CS 493, CS 500, CS 503
-	CS 533, CS 555, CS 566, CS 567, CS 599
+	CS 101, CS 117, CS 133, CS 137, CS 172
+	CS 186, CS 197, CS 198, CS 203, CS 210
+	CS 222, CS 226, CS 234, CS 240, CS 264
+	CS 289, CS 302, CS 306, CS 313, CS 321
+	CS 323, CS 326, CS 331, CS 333, CS 360
+	CS 365, CS 366, CS 368, CS 378, CS 391
+	CS 394, CS 420, CS 453, CS 457, CS 460
+	CS 465, CS 466, CS 478, CS 528, CS 545
+	CS 552, CS 563, CS 574, CS 581, CS 583
 
 
 Classroom Preferences:
-	CS 172 must be taught in Technology Hall, room 342
-	CS 302 must be taught in Technology Hall, room 242
+	CS 289 must be taught in Technology Hall, room 133
+	CS 321 must be taught in Technology Hall, room 132
+	CS 574 must be taught in Technology Hall, room 132
+	CS 583 must be taught in Technology Hall, room 131
 
 
 Faculty Assignments:
-Dr. Able, CS 172, CS 238, CS 355 - Preference: None
-Dr. Brovo, CS 322, CS 483, CS 503 - Preference: None
-Dr. Charlie, CS 114, CS 283, CS 389 - Preference: None
-Dr. Dog, CS 363, CS 488, CS 533 - Preference: None
-Dr. Echo, CS 107, CS 226, CS 342 - Preference: Morning classes only
-Dr. Foxtrot, CS 338, CS 480, CS 555 - Preference: None
-Dr. Golf, CS 190, CS 288, CS 317 - Preference: All Tues-Thurs classes
-Dr. Hotel, CS 302, CS 404, CS 500 - Preference: None
-Dr. India, CS 108, CS 247, CS 397 - Preference: None
-Dr. Juliet, CS 349, CS 489, CS 599 - Preference: Morning classes only
-Dr. Kilo, CS 189, CS 215, CS 320 - Preference: None
-Dr. Lima, CS 314, CS 431, CS 566 - Preference: None
-Dr. Mike, CS 144, CS 211, CS 376 - Preference: None
-Dr. November, CS 378, CS 493, CS 567 - Preference: None
-Dr. Oscar, CS 198, CS 273, CS 334 - Preference: All Tues-Thurs classes
+Dr. Able, CS 186, CS 203, CS 313 - Preference: None
+Dr. Brovo, CS 333, CS 460, CS 581 - Preference: None
+Dr. Charlie, CS 101, CS 222, CS 321 - Preference: None
+Dr. Dog, CS 368, CS 465, CS 563 - Preference: All Tues-Thurs classes
+Dr. Echo, CS 137, CS 264, CS 391 - Preference: None
+Dr. Foxtrot, CS 323, CS 420, CS 552 - Preference: Morning classes only
+Dr. Golf, CS 197, CS 226, CS 302 - Preference: None
+Dr. Hotel, CS 365, CS 453, CS 574 - Preference: None
+Dr. India, CS 198, CS 234, CS 378 - Preference: None
+Dr. Juliet, CS 360, CS 457, CS 583 - Preference: Afternoon classes only
+Dr. Kilo, CS 133, CS 210, CS 331 - Preference: None
+Dr. Lima, CS 306, CS 478, CS 528 - Preference: Evening classes only
+Dr. Mike, CS 117, CS 240, CS 366 - Preference: None
+Dr. November, CS 394, CS 466, CS 545 - Preference: All Tues-Thurs classes
+Dr. Oscar, CS 172, CS 289, CS 326 - Preference: None

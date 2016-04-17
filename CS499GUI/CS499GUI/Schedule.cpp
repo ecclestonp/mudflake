@@ -142,6 +142,9 @@ void Schedule::makeSchedule()
 					int numShifted = 0;
 					//Mon/Weds time checks
 					bitPos = origPos;
+					if (_c->hasPreference && _c->preference.find(classrooms[j]->roomNum) == std::string::npos)
+						continue;
+
 					while (bitPos != 0x00000000)
 					{
 						//first try for a mon/weds time slot
@@ -179,7 +182,8 @@ void Schedule::makeSchedule()
 		for (int i = 0; i < this->courses.size(); i++)
 		{
 			Course *c = courses[i];
-			//TODO: shit breaks if course and instructor have preference
+			
+			
 			if (c->alreadyScheduled)
 				continue;
 
@@ -194,10 +198,6 @@ void Schedule::makeSchedule()
 				//check for a classroom/time opening and assign it
 				for (int j = 0; j < this->classrooms.size(); j++)
 				{
-					//This causes an error sometimes, not always same text.  Needed to use .find instead
-					//if (classrooms[j]->roomNum.compare(c->preference.substr(5,3)))
-					//	continue;
-
 					if (c->preference.find(classrooms[j]->roomNum) == std::string::npos)
 						continue;
 

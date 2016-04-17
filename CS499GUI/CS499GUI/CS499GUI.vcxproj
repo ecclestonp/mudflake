@@ -22,7 +22,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CLRSupport>Pure</CLRSupport>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>v100</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
