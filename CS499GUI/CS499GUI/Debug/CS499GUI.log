@@ -1,20 +1,7 @@
-﻿Build started 4/17/2016 1:44:53 PM.
-     1>Project "C:\Users\paul\cs499\CS499GUI\CS499GUI\CS499GUI.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 4/17/2016 2:23:43 PM.
+     1>Project "C:\Users\paul\cs499\CS499GUI\CS499GUI\CS499GUI.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc /Fo"Debug\\" /Fd"Debug\vc110.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib stdafx.cpp
-         stdafx.cpp
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib AssemblyInfo.cpp BuildObj.cpp Course.cpp CS499GUI.cpp LoadParse.cpp OutputFile.cpp Schedule.cpp
-         AssemblyInfo.cpp
-         BuildObj.cpp
-         Course.cpp
-         CS499GUI.cpp
-     1>c:\users\paul\cs499\cs499gui\cs499gui\Form1.h(717): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\paul\cs499\cs499gui\cs499gui\Form1.h(723): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\paul\cs499\cs499gui\cs499gui\Form1.h(755): warning C4018: '<' : signed/unsigned mismatch
-         LoadParse.cpp
-     1>LoadParse.cpp(128): warning C4018: '<' : signed/unsigned mismatch
-     1>LoadParse.cpp(135): warning C4018: '<' : signed/unsigned mismatch
-         OutputFile.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib Schedule.cpp
          Schedule.cpp
      1>Schedule.cpp(35): warning C4018: '<' : signed/unsigned mismatch
      1>Schedule.cpp(40): warning C4018: '<' : signed/unsigned mismatch
@@ -32,11 +19,6 @@
      1>Schedule.cpp(326): warning C4018: '<' : signed/unsigned mismatch
      1>Schedule.cpp(336): warning C4018: '<' : signed/unsigned mismatch
      1>Schedule.cpp(367): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /TP /analyze- /errorReport:prompt "C:\Users\paul\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
-         .NETFramework,Version=v4.0.AssemblyAttributes.cpp
-       ResourceCompile:
-         C:\Program Files (x86)\Windows Kits\8.0\bin\x86\rc.exe /l"0x0409" /nologo /fo"Debug\app.res" app.rc 
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\paul\cs499\CS499GUI\Debug\CS499GUI.exe" /INCREMENTAL /NOLOGO user32.lib /ASSEMBLYRESOURCE:Debug\CS499GUI.Form1.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\paul\cs499\CS499GUI\Debug\CS499GUI.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
          Debug\AssemblyInfo.obj
@@ -49,8 +31,8 @@
          Debug\stdafx.obj
          "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
          CS499GUI.vcxproj -> C:\Users\paul\cs499\CS499GUI\Debug\CS499GUI.exe
-     1>Done Building Project "C:\Users\paul\cs499\CS499GUI\CS499GUI\CS499GUI.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "C:\Users\paul\cs499\CS499GUI\CS499GUI\CS499GUI.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:11.09
+Time Elapsed 00:00:04.90

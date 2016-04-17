@@ -106,7 +106,7 @@ void Schedule::makeSchedule()
 		}
 	}
 	//Zero out instructor times
-	for (int i = 1; i < this->instructors.size(); i++)
+	for (int i = 0; i < this->instructors.size(); i++)
 	{
 		instructors[i]->classTimeMW = instructors[i]->classTimeTT = 0;
 	}
