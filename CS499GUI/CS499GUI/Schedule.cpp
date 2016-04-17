@@ -1,6 +1,7 @@
 #include "Schedule.h"
 #include <string>
 #include <iostream>
+#include <Windows.h>
 //#include <initializer_list>
 
 using namespace std;
@@ -272,6 +273,19 @@ void Schedule::makeSchedule()
 						bitPos <<= 4;
 					}
 				}
+			}
+		}
+	}
+
+	/* Error checking */
+	for(int x = 0; x < this->courses.size(); x++)
+	{
+		for (int y = 0; y < 4; y++)
+		{
+			if(scheduleArray[x][y] == 999)
+			{
+				MessageBox( NULL, "An error was encountered when attempting to schedule a course.", "", MB_OK );
+				return;
 			}
 		}
 	}
