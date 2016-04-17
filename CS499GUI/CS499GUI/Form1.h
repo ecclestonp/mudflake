@@ -693,6 +693,9 @@ namespace CS499GUI {
 			//Load and parse the data
 			LoadParse tmploader;
 
+			//Load times passively
+			tmploader.readTimeFile("Times.dat", dept);
+
 			//Prompt for file and load it
 			if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
 			{
@@ -732,9 +735,6 @@ namespace CS499GUI {
 	private: System::Void toolStripMenuItem3_Click(System::Object^  sender, System::EventArgs^  e) {
 			//Load and parse the data
 			LoadParse tmploader;
-
-			//Load times passively
-			tmploader.readTimeFile("Times.dat", dept);
 
 			//Prompt for file and load it
 			if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)

@@ -15,6 +15,7 @@ public:
 	bool hasPreference;		//1 if there is a prefence, 0 if not
 	bool alreadyScheduled;
 	std::string preference;		//NULL if no preference, contains string of preference if there is one
+	unsigned int timePreference;
 	TIME courseTime; /* see TIME enum in schedule.h */
 
 	Course();

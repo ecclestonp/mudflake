@@ -72,7 +72,20 @@ bool Schedule::setCoursePreference(string courseName, string pref)
 	{
 		if (!courses.at(x)->courseNum.compare(courseName))
 		{
-			courses.at(x)->preference = pref;
+			if(pref.find(" - ") != std::string::npos)
+			{
+				for (int y = 0; y < 8; y++)
+				{
+					if (!theTimes[y].compare(pref))
+					{
+						unsigned int timeFlag = 0x00000001;
+						timeFlag <<= y * 4;
+						courses.at(x)->timePreference = timeFlag;
+					}
+				}
+			}
+			else
+				courses.at(x)->preference = pref;
 			courses.at(x)->hasPreference = true;
 			return true;
 		}
@@ -107,6 +120,11 @@ void Schedule::makeSchedule()
 			for (int tcourse = 0; tcourse < this->courses.size(); tcourse++)
 			{
 				unsigned int bitPos = 0x00000001;
+				unsigned int bitMask = 0;
+				unsigned int morningClasses = 0x00000111;
+				unsigned int afternoonClasses = 0x00111000;
+				unsigned int eveningClasses = 0x11100000;
+
 				bool ttonly = true;
 				bool mwonly = true;
 				
@@ -116,37 +134,104 @@ void Schedule::makeSchedule()
 				if(!instr->preference.compare("Afternoon classes only"))
 				{
 					bitPos = 0x00001000;
+					bitMask = afternoonClasses;
+
+					if(courses[tcourse]->timePreference)
+					{
+						if (bitPos = courses[tcourse]->timePreference && !(bitMask &= courses[tcourse]->timePreference))
+						{
+							if(IDYES == MessageBox( NULL, ("Conflicting preferences detected for course: " + courses[tcourse]->courseNum + ". Do you want to overrride the professor's preference (" + courses[tcourse]->profName + ") with the courses's preference?").c_str(), "Error", MB_YESNO))
+							{
+								bitMask = courses[tcourse]->timePreference;
+								bitPos = bitMask;
+							}
+							else
+							{
+								bitPos = 0x00001000;
+								bitMask = afternoonClasses;
+							}
+						}
+					}
 				}
 				else if (!instr->preference.compare("Evening classes only"))
 				{
 					bitPos = 0x01000000;
+					bitMask = eveningClasses;
+
+					if(courses[tcourse]->timePreference)
+					{
+						if (bitPos = courses[tcourse]->timePreference && !(bitMask &= courses[tcourse]->timePreference))
+						{
+							if(IDYES == MessageBox( NULL, ("Conflicting preferences detected for course: " + courses[tcourse]->courseNum + ". Do you want to overrride the professor's preference (" + courses[tcourse]->profName + ") with the courses's preference?").c_str(), "Error", MB_YESNO))
+							{
+								bitMask = courses[tcourse]->timePreference;
+								bitPos = bitMask;
+							}
+							else
+							{
+								bitPos = 0x01000000;
+								bitMask = eveningClasses;
+							}
+						}
+					}
 				}
 				else if (!instr->preference.compare("Morning classes only"))
 				{
 					bitPos = 0x00000001;
+					bitMask = morningClasses;
+
+					if(courses[tcourse]->timePreference)
+					{
+						if (bitPos = courses[tcourse]->timePreference && !(bitMask &= courses[tcourse]->timePreference))
+						{
+							if(IDYES == MessageBox( NULL, ("Conflicting preferences detected for course: " + courses[tcourse]->courseNum + ". Do you want to overrride the professor's preference (" + courses[tcourse]->profName + ") with the courses's preference?").c_str(), "Error", MB_YESNO))
+							{
+								bitMask = courses[tcourse]->timePreference;
+								bitPos = bitMask;
+							}
+							else
+							{
+								bitPos = 0x00000001;
+								bitMask = morningClasses;
+							}
+						}
+					}
 				}
 				else if (!instr->preference.compare("All Tues-Thurs classes"))
 				{
 					mwonly = false;
+					bitMask = 0x11111111;
+					if(courses[tcourse]->timePreference)
+					{
+						bitPos = courses[tcourse]->timePreference;
+						bitMask = courses[tcourse]->timePreference;
+					}
 				}
 				else // Assuming it's All Mon-Wed classes...
 				{
 					ttonly = false;
+					bitMask = 0x11111111;
+					if(courses[tcourse]->timePreference)
+					{
+						bitPos = courses[tcourse]->timePreference;
+						bitMask = courses[tcourse]->timePreference;
+					}
 				}
+
 				Course *_c = courses[tcourse];
+
 				_c->alreadyScheduled = true;
 				unsigned int origPos = bitPos;
 				// preference = "room 342"
 				//check for a classroom/time opening and assign it
 				for (int j = 0; j < this->classrooms.size(); j++)
 				{
-					int numShifted = 0;
 					//Mon/Weds time checks
 					bitPos = origPos;
-					if (_c->hasPreference && _c->preference.find(classrooms[j]->roomNum) == std::string::npos)
+					if (_c->hasPreference && (_c->preference.find(classrooms[j]->roomNum) == std::string::npos) && !_c->timePreference)
 						continue;
 
-					while (bitPos != 0x00000000)
+					while (bitPos & bitMask)
 					{
 						//first try for a mon/weds time slot
 						if (((this->classrooms[j]->classTimeMW & bitPos) == 0) && mwonly && ((instr->classTimeMW & bitPos) == 0))
@@ -166,9 +251,6 @@ void Schedule::makeSchedule()
 						{
 							//No time slot so shift bitPos left 4 bits
 							bitPos <<= 4;
-							numShifted++;
-							if(numShifted > 2 && mwonly && ttonly)
-								bitPos = 0;
 						}
 					}
 				}
@@ -199,10 +281,11 @@ void Schedule::makeSchedule()
 				//check for a classroom/time opening and assign it
 				for (int j = 0; j < this->classrooms.size(); j++)
 				{
-					if (c->preference.find(classrooms[j]->roomNum) == std::string::npos)
+					if (!c->timePreference && c->preference.find(classrooms[j]->roomNum) == std::string::npos)
 						continue;
 
-					bitPos = 0x00000001;
+					bitPos = c->timePreference?c->timePreference:0x00000001;
+
 					//Mon/Weds time checks
 					while (bitPos != 0x00000000)
 					{
@@ -224,6 +307,9 @@ void Schedule::makeSchedule()
 						{
 							//No time slot so shift bitPos left 4 bits
 							bitPos <<= 4;
+
+							if(c->timePreference)
+								bitPos = 0;
 						}
 					}
 				}

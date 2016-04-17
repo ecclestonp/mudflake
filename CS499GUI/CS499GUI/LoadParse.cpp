@@ -86,10 +86,16 @@ void LoadParse::parseInput(char *fName, Schedule *dept)
 			case 4:/*   CS 342 must be taught in Technology Hall, room 342 */
 				//TODO: implement contstraints on a case-by-case basis
 				//currently only parses string for preference string, does not put in course
-				if(strn.find("must") != std::string::npos)//had issues with "Classroom preferences" string, used to make sure error handled
+				if(strn.find("taught") != std::string::npos)//had issues with "Classroom preferences" string, used to make sure error handled
 				{
 					courseName[courseIdx] = strn.substr(1, strn.find(" must")-1);
 					coursePref[courseIdx++] = strn.substr(43, strn.find("/n"));
+				}
+				/* time pref*/
+				else if(strn.find("time slot") != std::string::npos)
+				{
+					courseName[courseIdx] = strn.substr(1, strn.find(" must")-1);
+					coursePref[courseIdx++] = strn.substr(strn.find("in the ") + 7, strn.find(" time") - (strn.find("in the ") + 7));
 				}
 			break;
 			case 6:/*   Dr. Echo, CS 107, CS 226, CS 342 - Preference: Morning classes only */
