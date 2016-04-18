@@ -1,4 +1,7 @@
-//Load and parse the data
+//CS499 Senior Project - Course Scheduling system
+//Load and parse class
+//Purpose: Loads/reads data from data files and parses it into the containers in the schedule class
+//Written by: Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
 #pragma once
 

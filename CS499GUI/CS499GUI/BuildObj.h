@@ -1,7 +1,7 @@
-//Interface file for BuildObj.cpp
-//Used to create all of the structure objects needed for a schedule
-//CS499 Senior Project
-//Ryan Manecke, Jeffrey Webb, Paul Eccleston
+//CS499 Senior Project - Course Scheduling system
+//Builder/factory for objects
+//Purpose: Used as a central point to build instances of objects for the schedule
+//Written by: Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
 #include "Classroom.h"
 #include "Course.h"

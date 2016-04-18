@@ -1,3 +1,8 @@
+//CS499 Senior Project - Course Scheduling system
+//Main code for the GUI
+//Purpose: Creates all GUI objects and all control for the objects
+//Written by: Ryan Manecke, Jeffrey Webb, Paul Eccleston
+
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -52,7 +57,8 @@ namespace CS499GUI {
 			this->comboBox2->Items->Add("All Tues-Thurs classes");
 			this->comboBox2->Items->Add("All Mon-Wed classes");
 			this->comboBox2->SelectedIndex = 0;
-			//Load times passively
+
+			//Load times passively from data file
 			LoadParse tmploader;
 			tmploader.readTimeFile("Times.dat", dept);
 		}
@@ -106,7 +112,7 @@ namespace CS499GUI {
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::ComboBox^  comboBox1;
 	private: System::Windows::Forms::ComboBox^  comboBox2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  InstructorName;
+
 	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label4;
@@ -122,9 +128,10 @@ namespace CS499GUI {
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::ComboBox^  comboBox5;
 	private: System::Windows::Forms::Label^  label6;
-
 	private: System::Windows::Forms::RadioButton^  radioButton2;
 	private: System::Windows::Forms::RadioButton^  radioButton1;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  InstructorName;
 
 	private:
 		/// <summary>
@@ -167,7 +174,6 @@ namespace CS499GUI {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->dataGridView4 = (gcnew System::Windows::Forms::DataGridView());
-			this->InstructorName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
 			this->label5 = (gcnew System::Windows::Forms::Label());
@@ -194,6 +200,8 @@ namespace CS499GUI {
 			this->toolStripMenuItem3 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripButton3 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripButton4 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton1 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->InstructorName = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->BeginInit();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->BeginInit();
@@ -211,7 +219,7 @@ namespace CS499GUI {
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(35, 341);
+			this->pictureBox1->Location = System::Drawing::Point(35, 472);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(149, 66);
 			this->pictureBox1->TabIndex = 0;
@@ -275,7 +283,7 @@ namespace CS499GUI {
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
 			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage1->Size = System::Drawing::Size(562, 357);
+			this->tabPage1->Size = System::Drawing::Size(562, 518);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Schedule";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -352,7 +360,7 @@ namespace CS499GUI {
 			this->dataGridView1->Location = System::Drawing::Point(0, 25);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
-			this->dataGridView1->Size = System::Drawing::Size(562, 329);
+			this->dataGridView1->Size = System::Drawing::Size(562, 493);
 			this->dataGridView1->TabIndex = 0;
 			this->dataGridView1->TabStop = false;
 			// 
@@ -401,7 +409,7 @@ namespace CS499GUI {
 			this->tabControl1->Location = System::Drawing::Point(224, 28);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(570, 383);
+			this->tabControl1->Size = System::Drawing::Size(570, 544);
 			this->tabControl1->TabIndex = 0;
 			this->tabControl1->TabStop = false;
 			// 
@@ -414,7 +422,7 @@ namespace CS499GUI {
 			this->tabControl2->Location = System::Drawing::Point(2, 28);
 			this->tabControl2->Name = L"tabControl2";
 			this->tabControl2->SelectedIndex = 0;
-			this->tabControl2->Size = System::Drawing::Size(217, 307);
+			this->tabControl2->Size = System::Drawing::Size(217, 406);
 			this->tabControl2->TabIndex = 0;
 			this->tabControl2->TabStop = false;
 			// 
@@ -429,7 +437,7 @@ namespace CS499GUI {
 			this->tabPage2->Location = System::Drawing::Point(4, 22);
 			this->tabPage2->Name = L"tabPage2";
 			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage2->Size = System::Drawing::Size(209, 281);
+			this->tabPage2->Size = System::Drawing::Size(209, 380);
 			this->tabPage2->TabIndex = 0;
 			this->tabPage2->Text = L"Add Instructor";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -461,16 +469,9 @@ namespace CS499GUI {
 			this->dataGridView4->Location = System::Drawing::Point(2, 117);
 			this->dataGridView4->Name = L"dataGridView4";
 			this->dataGridView4->ReadOnly = true;
-			this->dataGridView4->Size = System::Drawing::Size(200, 160);
+			this->dataGridView4->Size = System::Drawing::Size(200, 260);
 			this->dataGridView4->TabIndex = 11;
 			this->dataGridView4->TabStop = false;
-			// 
-			// InstructorName
-			// 
-			this->InstructorName->HeaderText = L"Instructor";
-			this->InstructorName->Name = L"InstructorName";
-			this->InstructorName->ReadOnly = true;
-			this->InstructorName->Width = 150;
 			// 
 			// checkBox1
 			// 
@@ -496,7 +497,7 @@ namespace CS499GUI {
 			this->tabPage3->Location = System::Drawing::Point(4, 22);
 			this->tabPage3->Name = L"tabPage3";
 			this->tabPage3->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage3->Size = System::Drawing::Size(209, 281);
+			this->tabPage3->Size = System::Drawing::Size(209, 380);
 			this->tabPage3->TabIndex = 1;
 			this->tabPage3->Text = L"Add Course";
 			this->tabPage3->UseVisualStyleBackColor = true;
@@ -545,7 +546,7 @@ namespace CS499GUI {
 			this->dataGridView2->Location = System::Drawing::Point(3, 149);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->ReadOnly = true;
-			this->dataGridView2->Size = System::Drawing::Size(200, 128);
+			this->dataGridView2->Size = System::Drawing::Size(200, 228);
 			this->dataGridView2->TabIndex = 12;
 			this->dataGridView2->TabStop = false;
 			// 
@@ -595,7 +596,7 @@ namespace CS499GUI {
 			this->tabPage4->Location = System::Drawing::Point(4, 22);
 			this->tabPage4->Name = L"tabPage4";
 			this->tabPage4->Padding = System::Windows::Forms::Padding(3);
-			this->tabPage4->Size = System::Drawing::Size(209, 281);
+			this->tabPage4->Size = System::Drawing::Size(209, 380);
 			this->tabPage4->TabIndex = 2;
 			this->tabPage4->Text = L"Add Room";
 			this->tabPage4->UseVisualStyleBackColor = true;
@@ -628,7 +629,7 @@ namespace CS499GUI {
 			this->dataGridView3->Location = System::Drawing::Point(2, 111);
 			this->dataGridView3->Name = L"dataGridView3";
 			this->dataGridView3->ReadOnly = true;
-			this->dataGridView3->Size = System::Drawing::Size(200, 164);
+			this->dataGridView3->Size = System::Drawing::Size(200, 266);
 			this->dataGridView3->TabIndex = 11;
 			this->dataGridView3->TabStop = false;
 			// 
@@ -656,8 +657,8 @@ namespace CS499GUI {
 			// toolStrip1
 			// 
 			this->toolStrip1->BackColor = System::Drawing::SystemColors::HotTrack;
-			this->toolStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->toolStripDropDownButton1, 
-				this->toolStripDropDownButton2, this->toolStripButton3, this->toolStripButton4});
+			this->toolStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {this->toolStripDropDownButton1, 
+				this->toolStripDropDownButton2, this->toolStripButton3, this->toolStripButton4, this->toolStripButton1});
 			this->toolStrip1->Location = System::Drawing::Point(0, 0);
 			this->toolStrip1->Name = L"toolStrip1";
 			this->toolStrip1->Size = System::Drawing::Size(794, 25);
@@ -733,11 +734,29 @@ namespace CS499GUI {
 			this->toolStripButton4->ToolTipText = L"Save Schedule";
 			this->toolStripButton4->Click += gcnew System::EventHandler(this, &Form1::toolStripButton4_Click);
 			// 
+			// toolStripButton1
+			// 
+			this->toolStripButton1->Alignment = System::Windows::Forms::ToolStripItemAlignment::Right;
+			this->toolStripButton1->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton1->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton1.Image")));
+			this->toolStripButton1->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton1->Name = L"toolStripButton1";
+			this->toolStripButton1->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton1->Text = L"About";
+			this->toolStripButton1->Click += gcnew System::EventHandler(this, &Form1::toolStripButton1_Click);
+			// 
+			// InstructorName
+			// 
+			this->InstructorName->HeaderText = L"Instructors";
+			this->InstructorName->Name = L"InstructorName";
+			this->InstructorName->ReadOnly = true;
+			this->InstructorName->Width = 150;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(794, 412);
+			this->ClientSize = System::Drawing::Size(794, 572);
 			this->Controls->Add(this->toolStrip1);
 			this->Controls->Add(this->tabControl2);
 			this->Controls->Add(this->tabControl1);
@@ -772,31 +791,25 @@ namespace CS499GUI {
 	private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
 			 }
 			 
-	//Load data csv
+	//Load data .csv toolbar dropdown button
 	private: System::Void toolStripMenuItem2_Click(System::Object^  sender, System::EventArgs^  e) {
 			//Load and parse the data
 			LoadParse tmploader;
 
-			//Clean out existing data
-			dept->ClearSchedule();
-
-			//Clear tables
-			dataGridView1->Rows->Clear();
-			dataGridView1->Refresh();
-			dataGridView2->Rows->Clear();
-			dataGridView2->Refresh();
-			dataGridView3->Rows->Clear();
-			dataGridView3->Refresh();
-			dataGridView4->Rows->Clear();
-			dataGridView4->Refresh();
-			comboBox1->Items->Clear();
-			
 			//Prompt for file and load it
 			if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
 			{
-				//Clear tables and stuff
+				//Clean out existing data (but not the room data since it is loaded elsewhere)
+				//Only do this if a file was actually selected to load
+				dept->ClearSchedule();
+
+				//Clear tables/comboboxes on GUI
+				dataGridView1->Rows->Clear();
+				dataGridView1->Refresh();
 				dataGridView2->Rows->Clear();
 				dataGridView2->Refresh();
+				dataGridView3->Rows->Clear();
+				dataGridView3->Refresh();
 				dataGridView4->Rows->Clear();
 				dataGridView4->Refresh();
 				comboBox1->Items->Clear();
@@ -806,8 +819,10 @@ namespace CS499GUI {
 				IntPtr ptrToNativeString = Marshal::StringToHGlobalAnsi(tmpstr);
 				char* fName = static_cast<char*>(ptrToNativeString.ToPointer());
 
+				//Send the file name to the parser
 				tmploader.parseInput(fName, dept);
 
+				//Put all of the courses and instructors parsed into grid views
 				System::String ^ theCourse;
 				for (int i = 0; i < dept->courses.size(); i++)
 				{
@@ -826,17 +841,17 @@ namespace CS499GUI {
 			this->tabPage1->Text = gcnew String(dept->deptName.c_str());
 		}
 
-	//Load room csv
+	//Load room csv button
 	private: System::Void toolStripMenuItem3_Click(System::Object^  sender, System::EventArgs^  e) {
 			//Load and parse the data
 			LoadParse tmploader;
 
-			//Clean up rooms if any were already loaded once
-			dept->ClearRooms();
-
 			//Prompt for file and load it
 			if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
 			{
+				//Clean up rooms if any were already loaded once
+				dept->ClearRooms();
+
 				//Clear table
 				dataGridView3->Rows->Clear();
 				dataGridView3->Refresh();
@@ -846,8 +861,10 @@ namespace CS499GUI {
 				IntPtr ptrToNativeString = Marshal::StringToHGlobalAnsi(tmpstr);
 				char* fName = static_cast<char*>(ptrToNativeString.ToPointer());
 
+				//Send room file name to read the selected room data file
 				tmploader.readRoomFile(fName, dept);
 
+				//Add the data to the grid view and combo boxes
 				System::String ^ theBldg;
 				System::String ^ theRoom;
 				for (int i = 0; i < dept->classrooms.size(); i++)
@@ -865,8 +882,8 @@ namespace CS499GUI {
 
 	//Generate Schedule
 	private: System::Void toolStripButton3_Click(System::Object^  sender, System::EventArgs^  e) {
-			
-			//See if there is any data to schedule
+			//Error handling first
+			//See if there is any data to schedule / make sure none of the containers are empty
 			if (dept->instructors.empty() || dept->classrooms.empty() || dept->courses.empty())
 			{
 				MessageBox::Show("You haven't added all of the required data for the schedule!","Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -888,7 +905,7 @@ namespace CS499GUI {
 			comboBox1->Items->Clear();
 			comboBox3->Items->Clear();
 				 
-			//Print the data into the table on screen
+			//Print the data into the table grid view on screen
 			for (int i = 0; i < 100; i++)
 			{
 				if (dept->scheduleArray[i][0] != 999)
@@ -988,7 +1005,7 @@ namespace CS499GUI {
 					this->dataGridView1->Rows->Add(theCourse, theInstr, theBldg, theRoom, theDay, theTime);
 				}
 			}
-			//Enable the save button now
+			//Enable/disable buttons and such
 			this->toolStripButton4->Enabled = true;
 			this->toolStripButton3->Enabled = false;
 			this->toolStripDropDownButton2->Enabled = false;
@@ -1012,6 +1029,7 @@ namespace CS499GUI {
 	private: System::Void toolStripButton4_Click(System::Object^  sender, System::EventArgs^  e) {
 			OutputFile tmpW;
 
+			//Warn user that any filters will be saved that way and allow them to choose one way or the other
 			if (table_FILTERED == true)
 			{
 				System::Windows::Forms::DialogResult result;
@@ -1038,12 +1056,8 @@ namespace CS499GUI {
 			}
 		}
 
-	//This section creates new schedules on new schedule button click
+	//This section creates new schedules / clears out data on new schedule button click
 	private: System::Void toolStripMenuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
-			//Clear out anything existing in the dept currently
-			dept->ClearSchedule();
-			dept->ClearRooms();
-
 			//See if user saved schedule to warn them if not
 			if (table_CREATED && !table_SAVED)
 			{
@@ -1056,6 +1070,10 @@ namespace CS499GUI {
 					this->toolStripButton4->PerformClick();
 				}
 			}
+
+			//Clear out anything existing in the dept currently
+			dept->ClearSchedule();
+			dept->ClearRooms();
 
 			//Clear tables and stuff
 			dataGridView1->Rows->Clear();
@@ -1092,7 +1110,7 @@ namespace CS499GUI {
 			this->comboBox1->Text = "";
 		 }
 
-	//Add instructor button
+	//Add instructor button - adds instructors to schedule manually
 	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 			bool prefbool = false;
 			msclr::interop::marshal_context context;
@@ -1112,7 +1130,7 @@ namespace CS499GUI {
 			this->comboBox2->SelectedIndex = 0;
 		 }
 
-	//Add course button
+	//Add course button - adds courses to schedule manually
 	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
 			bool prefbool = false;
 			msclr::interop::marshal_context context;
@@ -1144,7 +1162,7 @@ namespace CS499GUI {
 			}
 		}
 
-	//Add classroom button
+	//Add classroom button - adds classrooms to schedule manually
 	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
 			msclr::interop::marshal_context context;
 			string bldg = context.marshal_as<std::string>(this->textBox4->Text);
@@ -1182,7 +1200,8 @@ namespace CS499GUI {
 				this->comboBox3->Enabled = false;
 			}
 		}
-
+	
+	//Applys selected filter to data grid
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 			//Apply filter button
 			//filter instructors
@@ -1210,6 +1229,7 @@ namespace CS499GUI {
 			table_FILTERED = true;
 			this->button2->Enabled = false;
 		}
+	//Clears out any filters
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 			//Clear filter button
 			for (int i = 0; i < this->dataGridView1->RowCount; i++)
@@ -1245,6 +1265,10 @@ namespace CS499GUI {
 			}
 			if (this->comboBox5->Items->Count != 0)
 				this->comboBox5->SelectedIndex = 0;
+		}
+	//Help/about button
+	private: System::Void toolStripButton1_Click(System::Object^  sender, System::EventArgs^  e) {
+			MessageBox::Show("Course Scheduling System\nUniversity of Alabama, Huntsville CS 499 \nWritten by: Ryan Manecke, Paul Eccleston, Jeffrey Webb","About", MessageBoxButtons::OK, MessageBoxIcon::Question);
 		}
 };
 }

@@ -1,3 +1,8 @@
+//CS499 Senior Project - Course Scheduling system
+//Dept/schedule class
+//Purpose: Holds all of the schedule objects and automatically creates the schedule
+//Written by: Ryan Manecke, Jeffrey Webb, Paul Eccleston
+
 #include "Schedule.h"
 #include <string>
 #include <iostream>
@@ -134,9 +139,12 @@ void Schedule::makeSchedule()
 				bool ttonly = true;
 				bool mwonly = true;
 				
-				//TODO: shit breaks if course and instructor have preference
+				//See if instructor teaches this course, skip to next if not
 				if (courses[tcourse]->profName.compare(instr->instructorName))
 					continue;
+
+				//This section checks the preferences and sets bitpos/bitmask accordingly
+				//Also checks to see if there are conflicts with the course if it has preferences to be scheduled
 				if(!instr->preference.compare("Afternoon classes only"))
 				{
 					bitPos = 0x00001000;
@@ -190,7 +198,7 @@ void Schedule::makeSchedule()
 					{
 						if (bitPos = courses[tcourse]->timePreference && !(bitMask &= courses[tcourse]->timePreference))
 						{
-							if(IDYES == MessageBox( NULL, ("Conflicting preferences detected for course: " + courses[tcourse]->courseNum + ". Do you want to overrride the professor's preference (" + courses[tcourse]->profName + ") with the courses's preference?").c_str(), "Error", MB_YESNO))
+							if(IDYES == MessageBox( NULL, ("Conflicting preferences detected for course: " + courses[tcourse]->courseNum + ". Do you want to overrride the professor's preference (" + courses[tcourse]->profName + ") with the courses's preference?").c_str(), "Error", MB_ICONQUESTION | MB_YESNO))
 							{
 								bitMask = courses[tcourse]->timePreference;
 								bitPos = bitMask;
@@ -385,6 +393,7 @@ void Schedule::makeSchedule()
 }
 
 //Created this to remove the repeats of it in above algorithm
+//Sets the scheduled information into the schedulearray
 void Schedule::SetScheduleInfo(unsigned int bitPos, int i, int j, int MWorTT, Instructor *instr)
 {
 	if (MWorTT == 1)

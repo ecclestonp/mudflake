@@ -1,6 +1,7 @@
-//Course structure
-//CS499 Senior Project
-//Ryan Manecke, Jeffrey Webb, Paul Eccleston
+//CS499 Senior Project - Course Scheduling system
+//Course object
+//Purpose: Every course gets one of these - holds the relevant course data
+//Written by: Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
 #pragma once
 #include <string>

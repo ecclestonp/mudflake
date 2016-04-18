@@ -1,6 +1,7 @@
-//Classroom structure
-//CS499 Senior Project
-//Ryan Manecke, Jeffrey Webb, Paul Eccleston
+//CS499 Senior Project - Course Scheduling system
+//Classroom object
+//Purpose: Every classroom gets one of these - holds the relevant room/bldg data
+//Written by: Ryan Manecke, Jeffrey Webb, Paul Eccleston
 
 #pragma once
 #include <string>

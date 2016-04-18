@@ -1,3 +1,8 @@
+//CS499 Senior Project - Course Scheduling system
+//Course object
+//Purpose: Every course gets one of these - holds the relevant course data
+//Written by: Ryan Manecke, Jeffrey Webb, Paul Eccleston
+
 #include <string>
 #include <iostream>
 
