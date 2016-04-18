@@ -836,9 +836,9 @@ namespace CS499GUI {
 					this->dataGridView4->Rows->Add(theInstr);
 					this->comboBox1->Items->Add(theInstr);
 				}
+				this->comboBox1->SelectedIndex = 0;
+				this->tabPage1->Text = gcnew String(dept->deptName.c_str());
 			}
-			this->comboBox1->SelectedIndex = 0;
-			this->tabPage1->Text = gcnew String(dept->deptName.c_str());
 		}
 
 	//Load room csv button
