@@ -20,12 +20,15 @@ void OutputFile::writeToFile(System::Windows::Forms::DataGridView ^ dgv, char *f
 	//Write first lines into .csv file
 	outFile << deptName << endl;
 	outFile << "Course,Instructor,Building,Room,Day,Time" << endl;
+	msclr::interop::marshal_context context;
 
 	//Write the data array to the file in .csv format
 	for (int i = 0; i < dgv->RowCount; i++)
 	{
-		msclr::interop::marshal_context context;
-		outFile << context.marshal_as<std::string>(dgv->Rows[i]->Cells[0]->Value->ToString()) << "," << context.marshal_as<std::string>(dgv->Rows[i]->Cells[1]->Value->ToString()) << "," << context.marshal_as<std::string>(dgv->Rows[i]->Cells[2]->Value->ToString()) << "," << context.marshal_as<std::string>(dgv->Rows[i]->Cells[3]->Value->ToString()) << "," << context.marshal_as<std::string>(dgv->Rows[i]->Cells[4]->Value->ToString()) << "," << context.marshal_as<std::string>(dgv->Rows[i]->Cells[5]->Value->ToString()) << endl;
+		if (dgv->Rows[i]->Visible == true)
+		{
+			outFile << context.marshal_as<std::string>(dgv->Rows[i]->Cells[0]->Value->ToString()) << "," << context.marshal_as<std::string>(dgv->Rows[i]->Cells[1]->Value->ToString()) << "," << context.marshal_as<std::string>(dgv->Rows[i]->Cells[2]->Value->ToString()) << "," << context.marshal_as<std::string>(dgv->Rows[i]->Cells[3]->Value->ToString()) << "," << context.marshal_as<std::string>(dgv->Rows[i]->Cells[4]->Value->ToString()) << "," << context.marshal_as<std::string>(dgv->Rows[i]->Cells[5]->Value->ToString()) << endl;
+		}
 	}
 
 	//Close file

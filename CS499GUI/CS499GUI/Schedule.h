@@ -35,4 +35,5 @@ public:
 	bool setCoursePreference(string courseName, string pref);
 	void SetScheduleInfo(unsigned int bitPos, int i, int j, int MWorTT, Instructor *instr);
 	void ClearSchedule();
+	void ClearRooms();
 };

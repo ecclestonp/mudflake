@@ -1,38 +1,9 @@
-﻿Build started 4/17/2016 2:23:43 PM.
-     1>Project "C:\Users\paul\cs499\CS499GUI\CS499GUI\CS499GUI.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.0\References\CommonConfiguration\Neutral" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib Schedule.cpp
-         Schedule.cpp
-     1>Schedule.cpp(35): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(40): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(45): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(57): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(71): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(109): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(115): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(120): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(227): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(262): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(265): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(282): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(323): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(326): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(336): warning C4018: '<' : signed/unsigned mismatch
-     1>Schedule.cpp(367): warning C4018: '<' : signed/unsigned mismatch
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\paul\cs499\CS499GUI\Debug\CS499GUI.exe" /INCREMENTAL /NOLOGO user32.lib /ASSEMBLYRESOURCE:Debug\CS499GUI.Form1.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\paul\cs499\CS499GUI\Debug\CS499GUI.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\app.res
-         Debug\AssemblyInfo.obj
-         Debug\BuildObj.obj
-         Debug\Course.obj
-         Debug\CS499GUI.obj
-         Debug\LoadParse.obj
-         Debug\OutputFile.obj
-         Debug\Schedule.obj
-         Debug\stdafx.obj
-         "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
-         CS499GUI.vcxproj -> C:\Users\paul\cs499\CS499GUI\Debug\CS499GUI.exe
-     1>Done Building Project "C:\Users\paul\cs499\CS499GUI\CS499GUI\CS499GUI.vcxproj" (Build target(s)).
+﻿Build started 4/17/2016 7:28:31 PM.
+     1>Project "C:\Users\Ryan\Documents\GitHub\mudflake\CS499GUI\CS499GUI\CS499GUI.vcxproj" on node 2 (clean target(s)).
+     1>_PrepareForClean:
+         Deleting file "Debug\CS499GUI.lastbuildstate".
+     1>Done Building Project "C:\Users\Ryan\Documents\GitHub\mudflake\CS499GUI\CS499GUI\CS499GUI.vcxproj" (clean target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:04.90
+Time Elapsed 00:00:00.02

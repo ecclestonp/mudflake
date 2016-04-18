@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 #include <Windows.h>
-//#include <initializer_list>
 
 using namespace std;
 
@@ -15,6 +14,7 @@ Schedule::~Schedule()
 {
 	//Cleanup
 	ClearSchedule();
+	ClearRooms();
 }
 
 //Deletes pointers and such and resets the whole thing
@@ -37,17 +37,23 @@ void Schedule::ClearSchedule()
 		delete (courses[i]);
 	}
 	courses.clear();
-	for (int i = 0; i < classrooms.size(); i++)
-	{
-		delete (classrooms[i]);
-	}
-	classrooms.clear();
 	for (int i = 0; i < instructors.size(); i++)
 	{
 		delete (instructors[i]);
 	}
 	instructors.clear();
 
+	return;
+}
+
+//Clears out only the rooms
+void Schedule::ClearRooms()
+{
+	for (int i = 0; i < classrooms.size(); i++)
+	{
+		delete (classrooms[i]);
+	}
+	classrooms.clear();
 	return;
 }
 
@@ -140,7 +146,7 @@ void Schedule::makeSchedule()
 					{
 						if (bitPos = courses[tcourse]->timePreference && !(bitMask &= courses[tcourse]->timePreference))
 						{
-							if(IDYES == MessageBox( NULL, ("Conflicting preferences detected for course: " + courses[tcourse]->courseNum + ". Do you want to overrride the professor's preference (" + courses[tcourse]->profName + ") with the courses's preference?").c_str(), "Error", MB_YESNO))
+							if(IDYES == MessageBox( NULL, ("Conflicting preferences detected for course: " + courses[tcourse]->courseNum + ". Do you want to overrride the professor's preference (" + courses[tcourse]->profName + ") with the courses's preference?").c_str(), "Error", MB_ICONQUESTION | MB_YESNO))
 							{
 								bitMask = courses[tcourse]->timePreference;
 								bitPos = bitMask;
@@ -162,7 +168,7 @@ void Schedule::makeSchedule()
 					{
 						if (bitPos = courses[tcourse]->timePreference && !(bitMask &= courses[tcourse]->timePreference))
 						{
-							if(IDYES == MessageBox( NULL, ("Conflicting preferences detected for course: " + courses[tcourse]->courseNum + ". Do you want to overrride the professor's preference (" + courses[tcourse]->profName + ") with the courses's preference?").c_str(), "Error", MB_YESNO))
+							if(IDYES == MessageBox( NULL, ("Conflicting preferences detected for course: " + courses[tcourse]->courseNum + ". Do you want to overrride the professor's preference (" + courses[tcourse]->profName + ") with the courses's preference?").c_str(), "Error", MB_ICONQUESTION | MB_YESNO))
 							{
 								bitMask = courses[tcourse]->timePreference;
 								bitPos = bitMask;
@@ -370,7 +376,7 @@ void Schedule::makeSchedule()
 		{
 			if(scheduleArray[x][y] == 999)
 			{
-				MessageBox( NULL, "An error was encountered when attempting to schedule a course.", "", MB_OK );
+				MessageBox( NULL, "An error was encountered when attempting to schedule a course.", "Error", MB_ICONSTOP | MB_OK );
 				return;
 			}
 		}

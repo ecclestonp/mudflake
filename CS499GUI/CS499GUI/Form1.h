@@ -19,6 +19,9 @@ using namespace System::Runtime::InteropServices;
 #pragma once
 
 Schedule *dept = new Schedule;
+bool table_FILTERED = false;
+bool table_SAVED = false;
+bool table_CREATED = false;
 
 namespace CS499GUI {
 
@@ -41,12 +44,17 @@ namespace CS499GUI {
 			//
 			//TODO: Add the constructor code here
 			//
+
+			//Add instructor preferences
 			this->comboBox2->Items->Add("Morning classes only");
 			this->comboBox2->Items->Add("Afternoon classes only");
 			this->comboBox2->Items->Add("Evening classes only");
 			this->comboBox2->Items->Add("All Tues-Thurs classes");
 			this->comboBox2->Items->Add("All Mon-Wed classes");
 			this->comboBox2->SelectedIndex = 0;
+			//Load times passively
+			LoadParse tmploader;
+			tmploader.readTimeFile("Times.dat", dept);
 		}
 
 	protected:
@@ -78,19 +86,11 @@ namespace CS499GUI {
 	private: System::Windows::Forms::TextBox^  textBox3;
 	private: System::Windows::Forms::TabPage^  tabPage4;
 	private: System::Windows::Forms::CheckBox^  checkBox1;
-
 	private: System::Windows::Forms::CheckBox^  checkBox2;
 	private: System::Windows::Forms::DataGridView^  dataGridView1;
-
-
-
-
-
-
 	private: System::Windows::Forms::DataGridView^  dataGridView2;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  CourseNum;
 	private: System::Windows::Forms::DataGridView^  dataGridView4;
-
 	private: System::Windows::Forms::DataGridView^  dataGridView3;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Building;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  RoomNum;
@@ -118,6 +118,13 @@ namespace CS499GUI {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Room;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Day;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Time;
+	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::ComboBox^  comboBox5;
+	private: System::Windows::Forms::Label^  label6;
+
+	private: System::Windows::Forms::RadioButton^  radioButton2;
+	private: System::Windows::Forms::RadioButton^  radioButton1;
 
 	private:
 		/// <summary>
@@ -141,7 +148,19 @@ namespace CS499GUI {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
+			this->radioButton2 = (gcnew System::Windows::Forms::RadioButton());
+			this->radioButton1 = (gcnew System::Windows::Forms::RadioButton());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->comboBox5 = (gcnew System::Windows::Forms::ComboBox());
+			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Course = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Instructor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Bldg = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Room = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Day = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Time = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabControl2 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
@@ -175,12 +194,6 @@ namespace CS499GUI {
 			this->toolStripMenuItem3 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripButton3 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripButton4 = (gcnew System::Windows::Forms::ToolStripButton());
-			this->Course = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Instructor = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Bldg = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Room = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Day = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Time = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->BeginInit();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->BeginInit();
@@ -252,6 +265,12 @@ namespace CS499GUI {
 			// 
 			// tabPage1
 			// 
+			this->tabPage1->Controls->Add(this->radioButton2);
+			this->tabPage1->Controls->Add(this->radioButton1);
+			this->tabPage1->Controls->Add(this->button2);
+			this->tabPage1->Controls->Add(this->button1);
+			this->tabPage1->Controls->Add(this->comboBox5);
+			this->tabPage1->Controls->Add(this->label6);
 			this->tabPage1->Controls->Add(this->dataGridView1);
 			this->tabPage1->Location = System::Drawing::Point(4, 22);
 			this->tabPage1->Name = L"tabPage1";
@@ -261,6 +280,68 @@ namespace CS499GUI {
 			this->tabPage1->Text = L"Schedule";
 			this->tabPage1->UseVisualStyleBackColor = true;
 			// 
+			// radioButton2
+			// 
+			this->radioButton2->AutoSize = true;
+			this->radioButton2->Location = System::Drawing::Point(122, 4);
+			this->radioButton2->Name = L"radioButton2";
+			this->radioButton2->Size = System::Drawing::Size(53, 17);
+			this->radioButton2->TabIndex = 13;
+			this->radioButton2->TabStop = true;
+			this->radioButton2->Text = L"Room";
+			this->radioButton2->UseVisualStyleBackColor = true;
+			this->radioButton2->CheckedChanged += gcnew System::EventHandler(this, &Form1::radioButton2_CheckedChanged);
+			// 
+			// radioButton1
+			// 
+			this->radioButton1->AutoSize = true;
+			this->radioButton1->Checked = true;
+			this->radioButton1->Location = System::Drawing::Point(47, 4);
+			this->radioButton1->Name = L"radioButton1";
+			this->radioButton1->Size = System::Drawing::Size(69, 17);
+			this->radioButton1->TabIndex = 12;
+			this->radioButton1->TabStop = true;
+			this->radioButton1->Text = L"Instructor";
+			this->radioButton1->UseVisualStyleBackColor = true;
+			this->radioButton1->CheckedChanged += gcnew System::EventHandler(this, &Form1::radioButton1_CheckedChanged);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(421, 2);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(70, 20);
+			this->button2->TabIndex = 15;
+			this->button2->Text = L"Apply Filter";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(490, 2);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(70, 20);
+			this->button1->TabIndex = 16;
+			this->button1->Text = L"Clear Filter";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			// 
+			// comboBox5
+			// 
+			this->comboBox5->FormattingEnabled = true;
+			this->comboBox5->Location = System::Drawing::Point(181, 2);
+			this->comboBox5->Name = L"comboBox5";
+			this->comboBox5->Size = System::Drawing::Size(125, 21);
+			this->comboBox5->TabIndex = 14;
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(7, 6);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(37, 13);
+			this->label6->TabIndex = 2;
+			this->label6->Text = L"Filters:";
+			// 
 			// dataGridView1
 			// 
 			this->dataGridView1->AllowUserToAddRows = false;
@@ -268,16 +349,55 @@ namespace CS499GUI {
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(6) {this->Course, 
 				this->Instructor, this->Bldg, this->Room, this->Day, this->Time});
-			this->dataGridView1->Location = System::Drawing::Point(0, 0);
+			this->dataGridView1->Location = System::Drawing::Point(0, 25);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
-			this->dataGridView1->Size = System::Drawing::Size(562, 354);
+			this->dataGridView1->Size = System::Drawing::Size(562, 329);
 			this->dataGridView1->TabIndex = 0;
 			this->dataGridView1->TabStop = false;
+			// 
+			// Course
+			// 
+			this->Course->HeaderText = L"Course";
+			this->Course->Name = L"Course";
+			this->Course->ReadOnly = true;
+			// 
+			// Instructor
+			// 
+			this->Instructor->HeaderText = L"Instructor";
+			this->Instructor->Name = L"Instructor";
+			this->Instructor->ReadOnly = true;
+			// 
+			// Bldg
+			// 
+			this->Bldg->HeaderText = L"Bldg";
+			this->Bldg->Name = L"Bldg";
+			this->Bldg->ReadOnly = true;
+			// 
+			// Room
+			// 
+			this->Room->HeaderText = L"Room";
+			this->Room->Name = L"Room";
+			this->Room->ReadOnly = true;
+			this->Room->Width = 50;
+			// 
+			// Day
+			// 
+			this->Day->HeaderText = L"Day";
+			this->Day->Name = L"Day";
+			this->Day->ReadOnly = true;
+			this->Day->Width = 50;
+			// 
+			// Time
+			// 
+			this->Time->HeaderText = L"Time";
+			this->Time->Name = L"Time";
+			this->Time->ReadOnly = true;
 			// 
 			// tabControl1
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
+			this->tabControl1->Enabled = false;
 			this->tabControl1->Location = System::Drawing::Point(224, 28);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
@@ -530,6 +650,7 @@ namespace CS499GUI {
 			// 
 			this->saveFileDialog1->DefaultExt = L"csv";
 			this->saveFileDialog1->FileName = L"MySchedule.csv";
+			this->saveFileDialog1->Filter = L"Comma Delimited files (*.csv)|*.csv";
 			this->saveFileDialog1->Title = L"Save as .csv";
 			// 
 			// toolStrip1
@@ -612,44 +733,6 @@ namespace CS499GUI {
 			this->toolStripButton4->ToolTipText = L"Save Schedule";
 			this->toolStripButton4->Click += gcnew System::EventHandler(this, &Form1::toolStripButton4_Click);
 			// 
-			// Course
-			// 
-			this->Course->HeaderText = L"Course";
-			this->Course->Name = L"Course";
-			this->Course->ReadOnly = true;
-			// 
-			// Instructor
-			// 
-			this->Instructor->HeaderText = L"Instructor";
-			this->Instructor->Name = L"Instructor";
-			this->Instructor->ReadOnly = true;
-			// 
-			// Bldg
-			// 
-			this->Bldg->HeaderText = L"Bldg";
-			this->Bldg->Name = L"Bldg";
-			this->Bldg->ReadOnly = true;
-			// 
-			// Room
-			// 
-			this->Room->HeaderText = L"Room";
-			this->Room->Name = L"Room";
-			this->Room->ReadOnly = true;
-			this->Room->Width = 50;
-			// 
-			// Day
-			// 
-			this->Day->HeaderText = L"Day";
-			this->Day->Name = L"Day";
-			this->Day->ReadOnly = true;
-			this->Day->Width = 50;
-			// 
-			// Time
-			// 
-			this->Time->HeaderText = L"Time";
-			this->Time->Name = L"Time";
-			this->Time->ReadOnly = true;
-			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -666,6 +749,7 @@ namespace CS499GUI {
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->EndInit();
 			this->tabPage1->ResumeLayout(false);
+			this->tabPage1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->dataGridView1))->EndInit();
 			this->tabControl1->ResumeLayout(false);
 			this->tabControl2->ResumeLayout(false);
@@ -693,9 +777,20 @@ namespace CS499GUI {
 			//Load and parse the data
 			LoadParse tmploader;
 
-			//Load times passively
-			tmploader.readTimeFile("Times.dat", dept);
+			//Clean out existing data
+			dept->ClearSchedule();
 
+			//Clear tables
+			dataGridView1->Rows->Clear();
+			dataGridView1->Refresh();
+			dataGridView2->Rows->Clear();
+			dataGridView2->Refresh();
+			dataGridView3->Rows->Clear();
+			dataGridView3->Refresh();
+			dataGridView4->Rows->Clear();
+			dataGridView4->Refresh();
+			comboBox1->Items->Clear();
+			
 			//Prompt for file and load it
 			if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
 			{
@@ -736,6 +831,9 @@ namespace CS499GUI {
 			//Load and parse the data
 			LoadParse tmploader;
 
+			//Clean up rooms if any were already loaded once
+			dept->ClearRooms();
+
 			//Prompt for file and load it
 			if (openFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
 			{
@@ -759,19 +857,22 @@ namespace CS499GUI {
 					this->dataGridView3->Rows->Add(theBldg, theRoom);
 					this->comboBox3->Items->Add("Taught in " + theBldg + ", room " + theRoom);
 				}
-				for (int i = 0; i < 8; i++)
-				{
-					this->comboBox3->Items->Add("Must be in the " + gcnew String(dept->theTimes[i].c_str()) + " time slot.");
-				}
 
 				this->toolStripButton3->Enabled = true;
-				this->toolStripDropDownButton2->Enabled = false;
 				this->comboBox3->SelectedIndex = 0;
 			}
 		}
 
 	//Generate Schedule
 	private: System::Void toolStripButton3_Click(System::Object^  sender, System::EventArgs^  e) {
+			
+			//See if there is any data to schedule
+			if (dept->instructors.empty() || dept->classrooms.empty() || dept->courses.empty())
+			{
+				MessageBox::Show("You haven't added all of the required data for the schedule!","Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+			}
+				 
 			//Initiate schedule building
 			dept->makeSchedule();
 
@@ -785,117 +886,143 @@ namespace CS499GUI {
 			dataGridView4->Rows->Clear();
 			dataGridView4->Refresh();
 			comboBox1->Items->Clear();
-			comboBox1->Refresh();
 			comboBox3->Items->Clear();
-			comboBox3->Refresh();
 				 
 			//Print the data into the table on screen
-			for (int i = 0; dept->scheduleArray[i][0] != 999; i++)
+			for (int i = 0; i < 100; i++)
 			{
-				System::String ^ theDay;
-				System::String ^ theTime;
-				System::String ^ theCourse = gcnew String(dept->courses[dept->scheduleArray[i][1]]->courseNum.c_str());
-				System::String ^ theBldg = gcnew String(dept->classrooms[dept->scheduleArray[i][0]]->bldgNum.c_str());
-				System::String ^ theRoom = gcnew String(dept->classrooms[dept->scheduleArray[i][0]]->roomNum.c_str());
-				System::String ^ theInstr = gcnew String(dept->courses[dept->scheduleArray[i][1]]->profName.c_str());
+				if (dept->scheduleArray[i][0] != 999)
+				{
+					System::String ^ theDay;
+					System::String ^ theTime;
+					System::String ^ theCourse = gcnew String(dept->courses[dept->scheduleArray[i][1]]->courseNum.c_str());
+					System::String ^ theBldg = gcnew String(dept->classrooms[dept->scheduleArray[i][0]]->bldgNum.c_str());
+					System::String ^ theRoom = gcnew String(dept->classrooms[dept->scheduleArray[i][0]]->roomNum.c_str());
+					System::String ^ theInstr = gcnew String(dept->courses[dept->scheduleArray[i][1]]->profName.c_str());
 
-				//check to see which time it is assigned and print it
-				//mon/weds
-				if (dept->scheduleArray[i][2] == 0x00000001 && dept->scheduleArray[i][3] == 1)
-				{
-					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[0].c_str()) + " AM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x00000010  && dept->scheduleArray[i][3] == 1)
-				{
-					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[1].c_str()) + " AM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x00000100  && dept->scheduleArray[i][3] == 1)
-				{
-					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[2].c_str()) + " AM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x00001000  && dept->scheduleArray[i][3] == 1)
-				{
-					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[3].c_str()) + " PM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x00010000  && dept->scheduleArray[i][3] == 1)
-				{
-					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[4].c_str()) + " PM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x00100000  && dept->scheduleArray[i][3] == 1)
-				{
-					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[5].c_str()) + " PM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x01000000  && dept->scheduleArray[i][3] == 1)
-				{
-					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[6].c_str()) + " PM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x10000000  && dept->scheduleArray[i][3] == 1)
-				{
-					theDay = "MW";
-					theTime = gcnew String(dept->theTimes[7].c_str()) + " PM";
-				}
+					//check to see which time it is assigned and print it
+					//mon/weds
+					if (dept->scheduleArray[i][2] == 0x00000001 && dept->scheduleArray[i][3] == 1)
+					{
+						theDay = "MW";
+						theTime = gcnew String(dept->theTimes[0].c_str()) + " AM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x00000010  && dept->scheduleArray[i][3] == 1)
+					{
+						theDay = "MW";
+						theTime = gcnew String(dept->theTimes[1].c_str()) + " AM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x00000100  && dept->scheduleArray[i][3] == 1)
+					{
+						theDay = "MW";
+						theTime = gcnew String(dept->theTimes[2].c_str()) + " AM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x00001000  && dept->scheduleArray[i][3] == 1)
+					{
+						theDay = "MW";
+						theTime = gcnew String(dept->theTimes[3].c_str()) + " PM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x00010000  && dept->scheduleArray[i][3] == 1)
+					{
+						theDay = "MW";
+						theTime = gcnew String(dept->theTimes[4].c_str()) + " PM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x00100000  && dept->scheduleArray[i][3] == 1)
+					{
+						theDay = "MW";
+						theTime = gcnew String(dept->theTimes[5].c_str()) + " PM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x01000000  && dept->scheduleArray[i][3] == 1)
+					{
+						theDay = "MW";
+						theTime = gcnew String(dept->theTimes[6].c_str()) + " PM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x10000000  && dept->scheduleArray[i][3] == 1)
+					{
+						theDay = "MW";
+						theTime = gcnew String(dept->theTimes[7].c_str()) + " PM";
+					}
 
-				//tues/thurs
-				if (dept->scheduleArray[i][2] == 0x00000001 && dept->scheduleArray[i][3] == 2)
-				{
-					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[0].c_str()) + " AM";
+					//tues/thurs
+					if (dept->scheduleArray[i][2] == 0x00000001 && dept->scheduleArray[i][3] == 2)
+					{
+						theDay = "TT";
+						theTime = gcnew String(dept->theTimes[0].c_str()) + " AM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x00000010  && dept->scheduleArray[i][3] == 2)
+					{
+						theDay = "TT";
+						theTime = gcnew String(dept->theTimes[1].c_str()) + " AM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x00000100  && dept->scheduleArray[i][3] == 2)
+					{
+						theDay = "TT";
+						theTime = gcnew String(dept->theTimes[2].c_str()) + " AM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x00001000  && dept->scheduleArray[i][3] == 2)
+					{
+						theDay = "TT";
+						theTime = gcnew String(dept->theTimes[3].c_str()) + " PM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x00010000  && dept->scheduleArray[i][3] == 2)
+					{
+						theDay = "TT";
+						theTime = gcnew String(dept->theTimes[4].c_str()) + " PM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x00100000  && dept->scheduleArray[i][3] == 2)
+					{
+						theDay = "TT";
+						theTime = gcnew String(dept->theTimes[5].c_str()) + " PM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x01000000  && dept->scheduleArray[i][3] == 2)
+					{
+						theDay = "TT";
+						theTime = gcnew String(dept->theTimes[6].c_str()) + " PM";
+					}
+					else if (dept->scheduleArray[i][2] == 0x10000000  && dept->scheduleArray[i][3] == 2)
+					{
+						theDay = "TT";
+						theTime = gcnew String(dept->theTimes[7].c_str()) + " PM";
+					}
+					//Add the row to the GUI table
+					this->dataGridView1->Rows->Add(theCourse, theInstr, theBldg, theRoom, theDay, theTime);
 				}
-				else if (dept->scheduleArray[i][2] == 0x00000010  && dept->scheduleArray[i][3] == 2)
-				{
-					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[1].c_str()) + " AM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x00000100  && dept->scheduleArray[i][3] == 2)
-				{
-					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[2].c_str()) + " AM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x00001000  && dept->scheduleArray[i][3] == 2)
-				{
-					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[3].c_str()) + " PM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x00010000  && dept->scheduleArray[i][3] == 2)
-				{
-					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[4].c_str()) + " PM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x00100000  && dept->scheduleArray[i][3] == 2)
-				{
-					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[5].c_str()) + " PM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x01000000  && dept->scheduleArray[i][3] == 2)
-				{
-					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[6].c_str()) + " PM";
-				}
-				else if (dept->scheduleArray[i][2] == 0x10000000  && dept->scheduleArray[i][3] == 2)
-				{
-					theDay = "TT";
-					theTime = gcnew String(dept->theTimes[7].c_str()) + " PM";
-				}
-				//Add the row to the GUI table
-				this->dataGridView1->Rows->Add(theCourse, theInstr, theBldg, theRoom, theDay, theTime);
 			}
-
 			//Enable the save button now
 			this->toolStripButton4->Enabled = true;
 			this->toolStripButton3->Enabled = false;
+			this->toolStripDropDownButton2->Enabled = false;
 			this->tabControl2->Enabled = false;
+			this->tabControl1->Enabled = true;
+
+			table_CREATED = true;
+
+			//Clear and reset filters
+			comboBox5->Items->Clear();
+			System::String ^ theName;
+			for (int i = 0; i < dept->instructors.size(); i++)
+			{
+				theName = gcnew String(dept->instructors[i]->instructorName.c_str());
+				this->comboBox5->Items->Add(theName);
+			}
+			this->comboBox5->SelectedIndex = 0;
 		}
 
 	//Save Schedule to .csv file
 	private: System::Void toolStripButton4_Click(System::Object^  sender, System::EventArgs^  e) {
 			OutputFile tmpW;
+
+			if (table_FILTERED == true)
+			{
+				System::Windows::Forms::DialogResult result;
+				result = MessageBox::Show("You have applied a filter.  The schedule will be saved as filtered.  Click OK to continue and save or Cancel if you wish to change/clear filters.", "Filters in use", MessageBoxButtons::OKCancel, MessageBoxIcon::Information);
+				
+				if(result != System::Windows::Forms::DialogResult::OK)
+				{
+					return;
+				}
+			}
+
 			//Prompt for file name and location and print to file
 			if (saveFileDialog1->ShowDialog() == System::Windows::Forms:: DialogResult::OK)
 			{
@@ -906,6 +1033,8 @@ namespace CS499GUI {
 
 				//Create writefile instance and write the file
 				tmpW.writeToFile(this->dataGridView1, fName, dept->deptName);
+
+				table_SAVED = true;
 			}
 		}
 
@@ -913,6 +1042,20 @@ namespace CS499GUI {
 	private: System::Void toolStripMenuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
 			//Clear out anything existing in the dept currently
 			dept->ClearSchedule();
+			dept->ClearRooms();
+
+			//See if user saved schedule to warn them if not
+			if (table_CREATED && !table_SAVED)
+			{
+				System::Windows::Forms::DialogResult result;
+				result = MessageBox::Show("You haven't saved the schedule you created! Click OK to start a new schedule without saving or Cancel to save first.", "Warning", MessageBoxButtons::OKCancel, MessageBoxIcon::Question);
+				
+				if(result == System::Windows::Forms::DialogResult::Cancel)
+				{
+					//click save button for user automatically
+					this->toolStripButton4->PerformClick();
+				}
+			}
 
 			//Clear tables and stuff
 			dataGridView1->Rows->Clear();
@@ -925,12 +1068,28 @@ namespace CS499GUI {
 			dataGridView4->Refresh();
 			comboBox1->Items->Clear();
 			comboBox3->Items->Clear();
+			comboBox5->Items->Clear();
+			this->comboBox5->Text = "";
+			this->button2->Enabled = true;
+			table_FILTERED = table_CREATED = table_SAVED = false;
+
+			//Add some time preferences for courses
+			for (int i = 0; i < 8; i++)
+			{
+				this->comboBox3->Items->Add("Must be in the " + gcnew String(dept->theTimes[i].c_str()) + " time slot.");
+			}
+			this->comboBox3->SelectedIndex = 0;
 
 			//enable stuff
+			this->toolStripButton4->Enabled = false;
 			this->toolStripDropDownButton2->Enabled = true;
 			this->tabControl2->Enabled = true;
-			this->toolStripButton3->Enabled = false;
+			this->toolStripButton3->Enabled = true;
 			this->tabPage1->Text = "Schedule";
+			this->radioButton1->Checked = true;
+			this->radioButton2->Checked = false;
+			this->tabControl1->Enabled = false;
+			this->comboBox1->Text = "";
 		 }
 
 	//Add instructor button
@@ -959,6 +1118,7 @@ namespace CS499GUI {
 			msclr::interop::marshal_context context;
 			string courseNum = context.marshal_as<std::string>(this->textBox3->Text);
 			string instrName = context.marshal_as<std::string>(this->comboBox1->Text);
+			string coursePref = context.marshal_as<std::string>(this->comboBox3->Text);
 			if (this->checkBox2->Checked == true)
 			{
 				prefbool = true;
@@ -966,19 +1126,21 @@ namespace CS499GUI {
 
 			if (comboBox1->Items->Count == 0)
 			{
-				MessageBox::Show("You haven't added any instructors!  You must assign an instructor to this course.");
+				MessageBox::Show("You haven't added any instructors, you must assign an instructor to this course!","Error", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
 			}
 			else
 			{
-				dept->AddCourse(courseNum, "", prefbool);
-				dept->courses[dept->courses.size()-1]->profName = instrName;
+				coursePref = coursePref.substr(coursePref.find("in the ") + 7, coursePref.find(" time") - (coursePref.find("in the ") + 7));
+				dept->AddCourse(courseNum, coursePref, prefbool);
+				dept->setCourseProfessor(courseNum, instrName);
+				//dept->courses[dept->courses.size()-1]->profName = instrName;
+				dept->setCoursePreference(courseNum, coursePref);
 				this->dataGridView2->Rows->Add(this->textBox3->Text);
-
 				//Reset Fields
 				this->textBox3->Text = "";
 				this->checkBox2->Checked = false;
 				this->comboBox1->SelectedIndex = 0;
-				//this->comboBox3->SelectedIndex = 0;
+				this->comboBox3->SelectedIndex = 0;
 			}
 		}
 
@@ -1019,6 +1181,70 @@ namespace CS499GUI {
 			{
 				this->comboBox3->Enabled = false;
 			}
+		}
+
+	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+			//Apply filter button
+			//filter instructors
+			if (this->radioButton1->Checked == true)
+			{
+				for (int i = 0; i < this->dataGridView1->RowCount; i++)
+				{
+					if (this->dataGridView1->Rows[i]->Cells[1]->Value->ToString() != this->comboBox5->Text)
+					{
+						this->dataGridView1->Rows[i]->Visible = false;
+					}
+				}
+			}
+			//filter rooms
+			else if (this->radioButton2->Checked == true)
+			{
+				for (int i = 0; i < this->dataGridView1->RowCount; i++)
+				{
+					if (this->dataGridView1->Rows[i]->Cells[3]->Value->ToString() != this->comboBox5->Text)
+					{
+						this->dataGridView1->Rows[i]->Visible = false;
+					}
+				}
+			}
+			table_FILTERED = true;
+			this->button2->Enabled = false;
+		}
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+			//Clear filter button
+			for (int i = 0; i < this->dataGridView1->RowCount; i++)
+			{
+				this->dataGridView1->Rows[i]->Visible = true;
+			}
+			this->button2->Enabled = true;
+			table_FILTERED = false;
+		}
+
+	//Filter instructors checked
+	private: System::Void radioButton1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+			//this->radioButton2->Checked = false;
+			comboBox5->Items->Clear();
+			System::String ^ theName;
+			for (int i = 0; i < dept->instructors.size(); i++)
+			{
+				theName = gcnew String(dept->instructors[i]->instructorName.c_str());
+				this->comboBox5->Items->Add(theName);
+			}
+			if (this->comboBox5->Items->Count != 0)
+				this->comboBox5->SelectedIndex = 0;
+		}
+	//Filter Rooms checked
+	private: System::Void radioButton2_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
+			//this->radioButton1->Checked = false;
+			comboBox5->Items->Clear();
+			System::String ^ theRoom;
+			for (int i = 0; i < dept->classrooms.size(); i++)
+			{
+				theRoom = gcnew String(dept->classrooms[i]->roomNum.c_str());
+				this->comboBox5->Items->Add(theRoom);
+			}
+			if (this->comboBox5->Items->Count != 0)
+				this->comboBox5->SelectedIndex = 0;
 		}
 };
 }
